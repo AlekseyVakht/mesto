@@ -5,7 +5,6 @@
   background-size: cover;
   top: -40px;
   right: -40px;
-  cursor: pointer;
   transition: opacity .2s linear;
   opacity: 1;
   cursor: pointer;
