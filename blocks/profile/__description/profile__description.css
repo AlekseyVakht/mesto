@@ -14,9 +14,8 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 440px) {
   .profile__description {
-    position: relative;
     margin-top: 14px;
     font-size: 14px;
     line-height: 17px;

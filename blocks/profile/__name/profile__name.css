@@ -16,9 +16,8 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 440px) {
   .profile__name {
-    position: relative;
     font-size: 27px;
     line-height: 33px;
   }
