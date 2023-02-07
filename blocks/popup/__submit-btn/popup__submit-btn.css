@@ -2,15 +2,19 @@
   display: block;
   margin: 0 auto;
   cursor: pointer;
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: white;
   width: 83.25%;
   height: 50px;
   border: 0;
   border-radius: 2px;
   box-sizing: border-box;
   padding: 0;
-  background-image: url('../../../images/submit-btn.svg');
-  background-position: center;
-  background-color: transparent;
+  background-color: #000000;
   opacity: 1;
   transition: opacity .3s linear;
 }

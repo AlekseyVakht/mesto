@@ -12,13 +12,12 @@
   .popup__heading {
     font-size: 18px;
     line-height: 22px;
-    margin: 25px 0 75px;
+    margin: 25px auto 75px;
   }
 }
 
 @media screen and (max-width: 320px) {
   .popup__heading {
     width: 85%;
-    margin: 25px auto 75px;
   }
 }
