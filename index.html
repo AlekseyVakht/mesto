@@ -9,88 +9,91 @@
 
 <body class="root">
 
-  <main class="content">
-    <form class="popup">
-      <div class="popup__container">
-        <img class="popup__close-icon" src="images/popup-close-icon.svg" alt="Закрыть окно">
-        <h3 class="popup__heading">Редактировать профиль</h3>
-        <fieldset class="popup__input-container">
-          <input type="text" placeholder="Имя" value="Firstname" maxlength="20"class="popup__form-item popup__name">
-          <input type="text" placeholder="О себе" value="About" maxlength="50" class="popup__form-item popup__job">
-        </fieldset>
-        <button type="submit" class="popup__submit-btn">Сохранить</button>
-      </div>
-    </form>
+  <header class="header">
+    <img class="header__logo" src="images/logo.svg" alt="Лого">
+  </header>
 
-    <header class="header">
-      <img class="header__logo" src="images/header-logo.png" alt="Лого">
-    </header>
+  <main class="content">
     
     <section class="profile">
       <img class="profile__avatar" src="images/jak-iv-kusto.jpg" alt="Аватар">
       <div class="profile__info">
-        <h2 class="profile__name">Жак-Ив Кусто</h2>
-        <button class="profile__edit-btn"></button>
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <button type="button" class="profile__edit-btn"></button>
         <p class="profile__description">Исследователь океана</p>
       </div>
-      <button class="profile__add-btn"></button>
+      <button type="button" class="profile__add-btn"></button>
     </section>
 
     <section class="elements">
       <div class="element">
         <img class="element__image" src="images/karachevsk.png" alt="Карачевск">
         <div class="element__container">
-          <p class="element__heading">Карачевск</p>
-          <button class="element__like-icon"></button>
+          <h2 class="element__heading">Карачевск</h2>
+          <button type="button" class="element__like-icon"></button>
         </div>
       </div>
 
       <div class="element">
         <img class="element__image" src="images/elbrus.png" alt="Эльбрус">
         <div class="element__container">
-          <p class="element__heading">Гора Эльбрус</p>
-          <button class="element__like-icon"></button>
+          <h2 class="element__heading">Гора Эльбрус</h2>
+          <button type="button" class="element__like-icon"></button>
         </div>
       </div>
 
       <div class="element">
         <img class="element__image" src="images/dombai.png" alt="Домбай">
         <div class="element__container">
-          <p class="element__heading">Домбай</p>
-          <button class="element__like-icon"></button>
+          <h2 class="element__heading">Домбай</h2>
+          <button type="button" class="element__like-icon"></button>
         </div>
       </div>
       
       <div class="element">
         <img class="element__image" src="images/elbrus.png" alt="Эльбрус">
         <div class="element__container">
-          <p class="element__heading">Гора Эльбрус</p>
-          <button class="element__like-icon"></button>
+          <h2 class="element__heading">Гора Эльбрус</h2>
+          <button type="button" class="element__like-icon"></button>
         </div>
       </div>
 
       <div class="element">
         <img class="element__image" src="images/dombai.png" alt="Домбай">
         <div class="element__container">
-          <p class="element__heading">Домбай</p>
-          <button class="element__like-icon"></button>
+          <h2 class="element__heading">Домбай</h2>
+          <button type="button" class="element__like-icon"></button>
         </div>
       </div>
 
       <div class="element">
         <img class="element__image" src="images/karachevsk.png" alt="Карачеево-Черкессия">
         <div class="element__container">
-          <p class="element__heading">Карачеево-Черкессия</p>
-          <button class="element__like-icon"></button>
+          <h2 class="element__heading">Карачеево-Черкессия</h2>
+          <button type="button" class="element__like-icon"></button>
         </div>
       </div>
     </section>
+
+    <div class="popup">
+      <div class="popup__container">
+        <button type="button" class="popup__close-icon"></button>
+        <h3 class="popup__heading">Редактировать профиль</h3>
+        <form name="popup-form" class="popup__form">
+          <fieldset class="popup__input-container">
+            <input type="text" placeholder="Имя" name="firstname" value="Firstname" maxlength="20" class="popup__form-item popup__form-item_input_name">
+            <input type="text" placeholder="О себе" name="about" value="About" maxlength="50" class="popup__form-item popup__form-item_input_job">
+          </fieldset>
+          <button type="submit" class="popup__submit-btn"></button>
+        </form>
+      </div>
+    </div>
   </main>
 
   <footer class="footer">
     <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
   </footer>
 
-<script src="pages/index.js"></script>
+<script src="script/index.js"></script>
 </body>
 </html>

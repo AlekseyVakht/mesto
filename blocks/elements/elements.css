@@ -12,6 +12,12 @@
   }
 }
 
+@media screen and (max-width: 670px) {
+  .elements {
+    margin-top: 36px;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .elements {
     width: 88.125%;

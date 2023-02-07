@@ -15,13 +15,19 @@
 }
 
 .profile__add-btn:hover {
-  opacity: .5;
+  opacity: .6;
 }
 
 @media screen and (max-width: 670px) {
   .profile__add-btn {
-    width: 228px;
+    width: 282px;
     height: 50px;
     margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profile__add-btn {
+    background-size: 16px 16px;
   }
 }
