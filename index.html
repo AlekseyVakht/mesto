@@ -26,56 +26,19 @@
     </section>
 
     <section class="elements">
-      <div class="element">
-        <img class="element__image" src="images/karachevsk.png" alt="Карачевск">
-        <div class="element__container">
-          <h2 class="element__heading">Карачевск</h2>
-          <button type="button" class="element__like-icon"></button>
+      <template id="elements-template">
+        <div class="element">
+          <button type ="button" class="element__delete-icon"></button>
+          <img class="element__image" src="" alt="">
+          <div class="element__container">
+            <h2 class="element__heading"></h2>
+            <button type="button" class="element__like-icon"></button>
+          </div>
         </div>
-      </div>
-
-      <div class="element">
-        <img class="element__image" src="images/elbrus.png" alt="Эльбрус">
-        <div class="element__container">
-          <h2 class="element__heading">Гора Эльбрус</h2>
-          <button type="button" class="element__like-icon"></button>
-        </div>
-      </div>
-
-      <div class="element">
-        <img class="element__image" src="images/dombai.png" alt="Домбай">
-        <div class="element__container">
-          <h2 class="element__heading">Домбай</h2>
-          <button type="button" class="element__like-icon"></button>
-        </div>
-      </div>
-      
-      <div class="element">
-        <img class="element__image" src="images/elbrus.png" alt="Эльбрус">
-        <div class="element__container">
-          <h2 class="element__heading">Гора Эльбрус</h2>
-          <button type="button" class="element__like-icon"></button>
-        </div>
-      </div>
-
-      <div class="element">
-        <img class="element__image" src="images/dombai.png" alt="Домбай">
-        <div class="element__container">
-          <h2 class="element__heading">Домбай</h2>
-          <button type="button" class="element__like-icon"></button>
-        </div>
-      </div>
-
-      <div class="element">
-        <img class="element__image" src="images/karachevsk.png" alt="Карачеево-Черкессия">
-        <div class="element__container">
-          <h2 class="element__heading">Карачеево-Черкессия</h2>
-          <button type="button" class="element__like-icon"></button>
-        </div>
-      </div>
+    </template>
     </section>
 
-    <div class="popup">
+    <div id="popup-edit" class="popup"> <!--попап редактирования профиля-->
       <div class="popup__container">
         <button type="button" class="popup__close-icon"></button>
         <h3 class="popup__heading">Редактировать профиль</h3>
@@ -85,6 +48,20 @@
             <input type="text" placeholder="О себе" name="about" value="About" maxlength="50" class="popup__form-item popup__form-item_input_job">
           </fieldset>
           <button type="submit" class="popup__submit-btn">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="popup-new-place" class="popup"> <!--попап добавления новых мест-->
+      <div class="popup__container">
+        <button type="button" class="popup__close-icon"></button>
+        <h3 class="popup__heading">Новое место</h3>
+        <form name="popup-form" class="popup__form">
+          <fieldset class="popup__input-container">
+            <input type="text" placeholder="Название" name="place" value="" maxlength="20" class="popup__form-item popup__form-item_input_place">
+            <input type="text" placeholder="Ссылка на картинку" name="link" value="" maxlength="50" class="popup__form-item popup__form-item_input_link">
+          </fieldset>
+          <button type="submit" class="popup__submit-btn">Создать</button>
         </form>
       </div>
     </div>
