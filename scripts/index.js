@@ -28,23 +28,6 @@ const initialCards = [
 const cardsTemplate = document.querySelector('#elements-template').content;
 const cardsGrid = document.querySelector('.elements');
 
-initialCards.forEach(function(item) {
-  const userCard = cardsTemplate.querySelector('.element').cloneNode(true);
-  userCard.querySelector('.element__image').src=item.link;
-  userCard.querySelector('.element__image').setAttribute('alt', item.name[0].toUpperCase() + item.name.slice(1));
-  userCard.querySelector('.element__heading').textContent = item.name[0].toUpperCase() + item.name.slice(1);
-  cardsGrid.append(userCard);
-});
-
-const deleteButton = document.querySelectorAll('.element__delete-icon');
-deleteButton.forEach((item) => {
-  item.addEventListener('click', function () {
-    item.closest('.element').remove();
-  });
-});
-
-
-const formElement = document.querySelectorAll('.popup__form');
 let nameInput = document.querySelector('.popup__form-item_input_name');
 let jobInput = document.querySelector('.popup__form-item_input_job');
 
@@ -53,51 +36,94 @@ const addButton = document.querySelector('.profile__add-btn');
 
 let profileName = document.querySelector('.profile__name');
 let profileDescription = document.querySelector('.profile__description');
+const newPlace = document.querySelector('.popup__form-item_input_place');
+const newPlaceLink = document.querySelector('.popup__form-item_input_link')
 
-const popup = document.querySelectorAll('.popup');
 const popupEdit = document.querySelector('#popup-edit');
 const popupNewPlace = document.querySelector('#popup-new-place');
-const closeButton = document.querySelectorAll('.popup__close-icon');
+const popupImageScaler = document.querySelector('#popup-image-scaler');
 
-function togglePopup(evt) {
-  if (evt.target.matches('.profile__add-btn')) {
-    openAddPopup();
-  } else if (evt.target.matches('.profile__edit-btn')) {
-    openEditPopup();
-  };
+initialCards.forEach((item) => {
+  addCards(item.name, item.link);
+});
+
+function addCards(place, link) {
+  const userCard = cardsTemplate.querySelector('.element').cloneNode(true);
+  userCard.querySelector('.element__image').src=link;
+  userCard.querySelector('.element__image').setAttribute('alt', place[0].toUpperCase() + place.slice(1));
+  userCard.querySelector('.element__heading').textContent = place[0].toUpperCase() + place.slice(1);
+  cardsGrid.prepend(userCard);
+  const elementImages = document.querySelector('#element-pic');
+  elementImages.addEventListener('click', ()=>{
+    togglePopup(popupImageScaler);
+    let popupImage = document.querySelector('.popup__image');
+    let popupImageCapture = document.querySelector('.popup__image-capture');
+    popupImage.src=link;
+    popupImage.alt=place[0].toUpperCase() + place.slice(1);
+    popupImageCapture.textContent = place[0].toUpperCase() + place.slice(1);
+  });
+
+  toggleLike();
+  deleteCard();
 };
 
-addButton.addEventListener('click', togglePopup);
-editButton.addEventListener('click', togglePopup);
+function toggleLike() {
+  const likeIcon = document.querySelector('.element__like-icon');
+  likeIcon.addEventListener('click', (evt)=> {
+    evt.target.classList.toggle('element__like-icon_active');
+  });
+};
 
-function openEditPopup() {
-  popupEdit.classList.add('popup_opened');
+function deleteCard() {
+  const deleteButton = document.querySelector('.element__delete-icon');
+  deleteButton.addEventListener('click', (evt) => {
+    evt.target.closest('.element').remove();
+  });
+};
+
+function togglePopup(popup) {
+  popup.classList.add('popup_opened');
+};
+
+addButton.addEventListener('click', ()=> {
+  togglePopup(popupNewPlace);
+});
+editButton.addEventListener('click', ()=> {
+  togglePopup(popupEdit);
+  editPopup();
+});
+
+const formElement = document.querySelectorAll('.popup__form');
+formElement[0].addEventListener('submit', editFormSubmit);
+formElement[1].addEventListener('submit', addFormSubmit);
+
+function editPopup() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
 };
 
-function openAddPopup() {
-  popupNewPlace.classList.add('popup_opened');
-};
-
-function closePopup(evt) {
-  const index = Array.from(closeButton).indexOf(this);
-  const submit = Array.from(formElement).indexOf(this);
-  if (evt.target.matches('.popup__close-icon')) {
-    popup[index].classList.remove('popup_opened');
-  } else if (evt.target.matches('.popup__form')) {
-    popup[submit].classList.remove('popup_opened');
-  };
-};
-
-closeButton.forEach((btn) => {
-  btn.addEventListener('click', closePopup)
-});
-
-function handleFormSubmit(event) {
-  event.preventDefault();
+function editFormSubmit(evt) {
+  evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
-  closePopup();
+  closePopup(popupEdit);
 };
-formElement.forEach((btn) => btn.addEventListener('submit', handleFormSubmit));
+
+function addFormSubmit(evt) {
+  evt.preventDefault();
+  addCards(newPlace.value, newPlaceLink.value);
+  newPlaceLink.value = '';
+  newPlace.value = '';
+  closePopup(popupNewPlace);
+};
+
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+};
+
+const closeButton = document.querySelectorAll('.popup__close-icon');
+closeButton.forEach((item) => {
+  item.addEventListener(('click'), (evt)=> {
+    evt.target.closest('.popup').classList.remove('popup_opened');
+  });
+});

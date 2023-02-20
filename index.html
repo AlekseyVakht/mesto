@@ -29,7 +29,9 @@
       <template id="elements-template">
         <div class="element">
           <button type ="button" class="element__delete-icon"></button>
-          <img class="element__image" src="" alt="">
+          <div class="element__image-mask">
+            <img class="element__image" id="element-pic" src="" alt="">
+          </div>
           <div class="element__container">
             <h2 class="element__heading"></h2>
             <button type="button" class="element__like-icon"></button>
@@ -42,7 +44,7 @@
       <div class="popup__container">
         <button type="button" class="popup__close-icon"></button>
         <h3 class="popup__heading">Редактировать профиль</h3>
-        <form name="popup-form" class="popup__form">
+        <form id="popup-edit-form" name="popup-form" class="popup__form">
           <fieldset class="popup__input-container">
             <input type="text" placeholder="Имя" name="firstname" value="Firstname" maxlength="20" class="popup__form-item popup__form-item_input_name">
             <input type="text" placeholder="О себе" name="about" value="About" maxlength="50" class="popup__form-item popup__form-item_input_job">
@@ -56,14 +58,22 @@
       <div class="popup__container">
         <button type="button" class="popup__close-icon"></button>
         <h3 class="popup__heading">Новое место</h3>
-        <form name="popup-form" class="popup__form">
+        <form id="popup-new-place-form" name="popup-form" class="popup__form">
           <fieldset class="popup__input-container">
-            <input type="text" placeholder="Название" name="place" value="" maxlength="20" class="popup__form-item popup__form-item_input_place">
-            <input type="text" placeholder="Ссылка на картинку" name="link" value="" maxlength="50" class="popup__form-item popup__form-item_input_link">
+            <input type="text" placeholder="Название" name="place" value="" maxlength="20" class="popup__form-item popup__form-item_input_place" required>
+            <input type="text" placeholder="Ссылка на картинку" name="link" value="" class="popup__form-item popup__form-item_input_link" required>
           </fieldset>
           <button type="submit" class="popup__submit-btn">Создать</button>
         </form>
       </div>
+    </div>
+
+    <div id="popup-image-scaler" class="popup popup_opacity_darker"> <!--попап открытия картинки по клику-->
+        <figure class="popup__image-container">
+          <button type="button" class="popup__close-icon"></button>
+          <img class="popup__image" src="" alt="">
+          <figcaption class="popup__image-capture"></figcaption>
+        </figure>
     </div>
   </main>
 

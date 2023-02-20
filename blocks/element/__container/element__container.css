@@ -3,6 +3,5 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  min-height: 23px;
   max-width: 246px;
 }
