@@ -26,18 +26,6 @@
     </section>
 
     <section class="elements">
-      <template id="elements-template">
-        <div class="element">
-          <button type ="button" class="element__delete-icon"></button>
-          <div class="element__image-mask">
-            <img class="element__image" id="element-pic" src="#" alt="">
-          </div>
-          <div class="element__container">
-            <h2 class="element__heading"></h2>
-            <button type="button" class="element__like-icon"></button>
-          </div>
-        </div>
-    </template>
     </section>
 
     <div id="popup-edit" class="popup"> <!--попап редактирования профиля-->
@@ -81,6 +69,21 @@
     <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
   </footer>
 
+  
+<template id="elements-template">
+  <div class="element">
+    <button type ="button" class="element__delete-icon"></button>
+    <div class="element__image-mask">
+      <img class="element__image" src="#" alt="">
+    </div>
+    <div class="element__container">
+      <h2 class="element__heading"></h2>
+      <button type="button" class="element__like-icon"></button>
+    </div>
+  </div>
+</template>
+
+<script src="scripts/cards.js"></script>
 <script src="scripts/index.js"></script>
 </body>
 </html>
