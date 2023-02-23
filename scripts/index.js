@@ -20,7 +20,8 @@ const popupImageCapture = document.querySelector('.popup__image-capture');
 
 
 initialCards.forEach((item) => {
-  addCards(item.name, item.link);
+  cardsGrid.prepend(addCards(item.name, item.link));
+
 });
 
 
@@ -31,16 +32,15 @@ function addCards(place, link) {
   userCardImage.src=link;
   userCardImage.setAttribute('alt', place[0].toUpperCase() + place.slice(1));
   userCardHeading.textContent = place[0].toUpperCase() + place.slice(1);
-  cardsGrid.prepend(userCard);
   userCardImage.addEventListener('click', ()=>{
     togglePopup(popupImageScaler);
     popupImage.src=link;
     popupImage.alt=place[0].toUpperCase() + place.slice(1);
     popupImageCapture.textContent = place[0].toUpperCase() + place.slice(1);
   });
-  const likeIcon = document.querySelector('.element__like-icon');
+  const likeIcon =userCard.querySelector('.element__like-icon');
   toggleLike(likeIcon);
-  const deleteButton = document.querySelector('.element__delete-icon');
+  const deleteButton = userCard.querySelector('.element__delete-icon');
   deleteCard(deleteButton);
   return userCard;
 };
@@ -89,7 +89,7 @@ function editFormSubmit(evt) {
 
 function addFormSubmit(evt) {
   evt.preventDefault();
-  addCards(newPlace.value, newPlaceLink.value);
+  cardsGrid.prepend(addCards(newPlace.value, newPlaceLink.value));
   newPlaceLink.value = '';
   newPlace.value = '';
   closePopup(popupNewPlace);
