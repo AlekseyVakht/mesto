@@ -4,7 +4,7 @@ const options = {
   submitButtonSelector: '.popup__submit-btn',
   inactiveButtonClass: 'popup__submit-btn_inactive',
   inputErrorClass: 'popup__form-item_input_type-error',
-  errorClass: 'popup__input-error'
+  errorClass: 'popup__input-error_active'
 };
 
 const formElement = document.querySelector(options.formSelector);
@@ -13,13 +13,13 @@ function showInputError(formElement, inputElement, errorMessage) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
   inputElement.classList.add(options.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input-error_active');
+  errorElement.classList.add(options.errorClass);
 };
 
 function hideInputError(formElement, inputElement) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
   inputElement.classList.remove(options.inputErrorClass);
-  errorElement.classList.remove('popup__input-error_active');
+  errorElement.classList.remove(options.errorClass);
   errorElement.textContent = '';
 };
 
