@@ -25,38 +25,49 @@
       <button type="button" class="profile__add-btn"></button>
     </section>
 
-    <section class="elements">
-    </section>
+    <section class="elements"></section>
 
-    <div id="popup-edit" class="popup"> <!--попап редактирования профиля-->
+    <div id="popup-edit" class="popup">
       <div class="popup__container">
         <button type="button" class="popup__close-icon"></button>
         <h3 class="popup__heading">Редактировать профиль</h3>
-        <form id="popup-edit-form" name="popup-form" class="popup__form">
+        <form id="popup-edit-form" name="popup-edit" class="popup__form" novalidate>
           <fieldset class="popup__input-container">
-            <input type="text" placeholder="Имя" name="firstname" value="Firstname" maxlength="20" class="popup__form-item popup__form-item_input_name">
-            <input type="text" placeholder="О себе" name="about" value="About" maxlength="50" class="popup__form-item popup__form-item_input_job">
+            <div class="popup__input-field">
+              <input id="name-input" type="text" placeholder="Имя" name="firstname" value="" minlength="2" maxlength="20" class="popup__form-item popup__form-item_input_name" required>
+              <span class="name-input-error popup__input-error"></span>
+            </div>
+            <div class="popup__input-field">
+              <input id="description-input" type="text"  placeholder="О себе" name="about" value="About" minlength="2" maxlength="200" class="popup__form-item popup__form-item_input_job" required>
+              <span class="description-input-error popup__input-error"></span>
+            </div>
           </fieldset>
           <button type="submit" class="popup__submit-btn">Сохранить</button>
         </form>
       </div>
     </div>
 
-    <div id="popup-new-place" class="popup"> <!--попап добавления новых мест-->
+    <div id="popup-new-place" class="popup"> 
       <div class="popup__container">
         <button type="button" class="popup__close-icon"></button>
         <h3 class="popup__heading">Новое место</h3>
-        <form id="popup-new-place-form" name="popup-form" class="popup__form">
+        <form id="popup-new-place-form" name="popup-new-place" class="popup__form" novalidate>
           <fieldset class="popup__input-container">
-            <input type="text" placeholder="Название" name="place" value="" maxlength="20" class="popup__form-item popup__form-item_input_place" required>
-            <input type="text" placeholder="Ссылка на картинку" name="link" value="" class="popup__form-item popup__form-item_input_link" required>
+            <div class="popup__input-field">
+              <input id="place-input" type="text" placeholder="Название" name="place" value="" minlength="2" maxlength="30" class="popup__form-item popup__form-item_input_place" required>
+              <span class="place-input-error popup__input-error"></span>
+            </div>
+            <div class="popup__input-field">
+              <input id="url-input" type="url" placeholder="Ссылка на картинку" name="link" value="" class="popup__form-item popup__form-item_input_link" required>
+              <span class="url-input-error popup__input-error"></span>
+            </div>
           </fieldset>
           <button type="submit" class="popup__submit-btn">Создать</button>
         </form>
       </div>
     </div>
 
-    <div id="popup-image-scaler" class="popup popup_opacity_darker"> <!--попап открытия картинки по клику-->
+    <div id="popup-image-scaler" class="popup popup_opacity_darker">
         <figure class="popup__image-container">
           <button type="button" class="popup__close-icon"></button>
           <img class="popup__image" src="#" alt="">
@@ -85,5 +96,6 @@
 
 <script src="scripts/cards.js"></script>
 <script src="scripts/index.js"></script>
+<script src="scripts/validate.js"></script>
 </body>
 </html>

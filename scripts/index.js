@@ -18,12 +18,9 @@ const popupImageScaler = document.querySelector('#popup-image-scaler');
 const popupImage = document.querySelector('.popup__image');
 const popupImageCapture = document.querySelector('.popup__image-capture');
 
-
 initialCards.forEach((item) => {
   cardsGrid.prepend(addCards(item.name, item.link));
-
 });
-
 
 function addCards(place, link) {
   const userCard = cardsTemplate.querySelector('.element').cloneNode(true);
@@ -59,11 +56,28 @@ function deleteCard(btn) {
 
 function togglePopup(popup) {
   popup.classList.add('popup_opened');
+  setPopupEventListeners(popup);
+};
+
+function setPopupEventListeners(popup) {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target === evt.currentTarget){
+      closePopup(popup);
+      popup.removeEventListener('click', setPopupEventListeners);
+    };
+  });
+  popup.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape'){
+      closePopup(popup);
+      popup.removeEventListener('keydown', setPopupEventListeners);
+    }
+  });
 };
 
 addButton.addEventListener('click', ()=> {
   togglePopup(popupNewPlace);
 });
+
 editButton.addEventListener('click', ()=> {
   togglePopup(popupEdit);
   editPopup();
