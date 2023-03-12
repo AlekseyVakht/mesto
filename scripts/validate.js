@@ -7,8 +7,6 @@ const options = {
   errorClass: 'popup__input-error_active'
 };
 
-const formElement = document.querySelector(options.formSelector);
-
 function showInputError(formElement, inputElement, errorMessage) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
   inputElement.classList.add(options.inputErrorClass);
@@ -40,21 +38,16 @@ function setEventListeners(formElement) {
       isValid(formElement, inputElement);
       toggleButtonState(inputList, buttonElement);
     });
-    inputElement.addEventListener('keypress', (evt) => {
-      if (evt.key == 'Enter' && hasInvalidInput(inputList)) {
-        evt.preventDefault();
-      } else {
-        inputElement.removeEventListener('keypress', setEventListeners);
-      }
-    });
   });
 };
 
 function toggleButtonState(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(options.inactiveButtonClass);
+    buttonElement.setAttribute('disabled', 'disabled');
   } else {
     buttonElement.classList.remove(options.inactiveButtonClass);
+    buttonElement.removeAttribute('disabled', 'disabled');
   }
 };
 
