@@ -24,6 +24,15 @@ const addFormElement = document.querySelector('#popup-new-place-form');
 const closeButtons = document.querySelectorAll('.popup__close-icon');
 const popups = document.querySelectorAll('.popup');
 
+const options = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__form-item',
+  submitButtonSelector: '.popup__submit-btn',
+  inactiveButtonClass: 'popup__submit-btn_inactive',
+  inputErrorClass: 'popup__form-item_input_type-error',
+  errorClass: 'popup__input-error_active'
+};
+
 initialCards.forEach((item) => {
   cardsGrid.prepend(addCards(item.name, item.link));
 });
@@ -65,7 +74,7 @@ function togglePopup(popup) {
   document.addEventListener("keydown", closePopupByEsc);
 };
 
-addButton.addEventListener('click', ()=> {
+addButton.addEventListener('click', () => {
   togglePopup(popupNewPlace);
 });
 
@@ -92,10 +101,16 @@ function editFormSubmit(evt) {
 function addFormSubmit(evt) {
   evt.preventDefault();
   cardsGrid.prepend(addCards(newPlace.value, newPlaceLink.value));
-  addFormElement.reset();
-  enableValidation(options);
   closePopup(popupNewPlace);
+  addFormElement.reset();
+  const submitBtn = addFormElement.querySelector('.popup__submit-btn');
+  disableSubmitBtn(submitBtn);
 };
+
+function disableSubmitBtn (btn) {
+  btn.disabled = true;
+  btn.classList.add('popup__submit-btn_inactive');
+}
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -103,8 +118,8 @@ function closePopup(popup) {
 };
 
 function closePopupByEsc(evt) {
-  const openedPopup = document.querySelector('.popup_opened');
   if (evt.key == 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   };
 };
@@ -123,3 +138,4 @@ popups.forEach((item) => {
   });
 });
 
+enableValidation(options);
