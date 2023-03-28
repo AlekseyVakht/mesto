@@ -1,6 +1,3 @@
-const cardsTemplate = document.querySelector('#elements-template').content;
-const cardsGrid = document.querySelector('.elements');
-
 const nameInput = document.querySelector('.popup__form-item_input_name');
 const jobInput = document.querySelector('.popup__form-item_input_job');
 
@@ -14,9 +11,6 @@ const newPlaceLink = document.querySelector('.popup__form-item_input_link')
 
 const popupEdit = document.querySelector('#popup-edit');
 const popupNewPlace = document.querySelector('#popup-new-place');
-const popupImageScaler = document.querySelector('#popup-image-scaler');
-const popupImage = document.querySelector('.popup__image');
-const popupImageCapture = document.querySelector('.popup__image-capture');
 
 const editFormElement = document.querySelector('#popup-edit-form');
 const addFormElement = document.querySelector('#popup-new-place-form');
@@ -24,52 +18,14 @@ const addFormElement = document.querySelector('#popup-new-place-form');
 const closeButtons = document.querySelectorAll('.popup__close-icon');
 const popups = document.querySelectorAll('.popup');
 
-const options = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__form-item',
-  submitButtonSelector: '.popup__submit-btn',
-  inactiveButtonClass: 'popup__submit-btn_inactive',
-  inputErrorClass: 'popup__form-item_input_type-error',
-  errorClass: 'popup__input-error_active'
-};
-
 initialCards.forEach((item) => {
-  cardsGrid.prepend(addCards(item.name, item.link));
-});
+  const card = new Card(item, '#elements-template');
+  const cardElement = card.generateCard();
 
-function addCards(place, link) {
-  const userCard = cardsTemplate.querySelector('.element').cloneNode(true);
-  const userCardImage = userCard.querySelector('.element__image');
-  const userCardHeading = userCard.querySelector('.element__heading');
-  userCardImage.src=link;
-  userCardImage.setAttribute('alt', place[0].toUpperCase() + place.slice(1));
-  userCardHeading.textContent = place[0].toUpperCase() + place.slice(1);
-  userCardImage.addEventListener('click', ()=>{
-    togglePopup(popupImageScaler);
-    popupImage.src=link;
-    popupImage.alt=place[0].toUpperCase() + place.slice(1);
-    popupImageCapture.textContent = place[0].toUpperCase() + place.slice(1);
-  });
-  const likeIcon =userCard.querySelector('.element__like-icon');
-  toggleLike(likeIcon);
-  const deleteButton = userCard.querySelector('.element__delete-icon');
-  deleteCard(deleteButton);
-  return userCard;
-};
+  document.querySelector('.elements').prepend(cardElement);
+ });
 
-function toggleLike(btn) {
-  btn.addEventListener('click', (evt)=> {
-    evt.target.classList.toggle('element__like-icon_active');
-  });
-};
-
-function deleteCard(btn) {
-  btn.addEventListener('click', (evt) => {
-    evt.target.closest('.element').remove();
-  });
-};
-
-function togglePopup(popup) {
+export function togglePopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener("keydown", closePopupByEsc);
 };
@@ -100,7 +56,12 @@ function editFormSubmit(evt) {
 
 function addFormSubmit(evt) {
   evt.preventDefault();
-  cardsGrid.prepend(addCards(newPlace.value, newPlaceLink.value));
+  const cardData = {
+    name: newPlace.value,
+    link: newPlaceLink.value,
+  };
+  const card = new Card(cardData, '#elements-template');
+  document.querySelector('.elements').prepend(card.generateCard());
   closePopup(popupNewPlace);
   addFormElement.reset();
   const submitBtn = addFormElement.querySelector('.popup__submit-btn');
@@ -138,4 +99,25 @@ popups.forEach((item) => {
   });
 });
 
+const options = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__form-item',
+  submitButtonSelector: '.popup__submit-btn',
+  inactiveButtonClass: 'popup__submit-btn_inactive',
+  inputErrorClass: 'popup__form-item_input_type-error',
+  errorClass: 'popup__input-error_active'
+};
+
+function enableValidation(options) {
+  const formList = Array.from(document.querySelectorAll(options.formSelector));
+  formList.forEach((formElement) => {
+    const validate = new FormValidator(options, formElement);
+    validate.enableValidation(options);
+  });
+}
+
 enableValidation(options);
+
+import {initialCards} from './cards.js';
+import {FormValidator} from './FormValidator.js';
+import {Card} from './Card.js';
