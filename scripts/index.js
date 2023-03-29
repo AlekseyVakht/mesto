@@ -6,11 +6,16 @@ const addButton = document.querySelector('.profile__add-btn');
 
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
+
 const newPlace = document.querySelector('.popup__form-item_input_place');
 const newPlaceLink = document.querySelector('.popup__form-item_input_link')
 
-const popupEdit = document.querySelector('#popup-edit');
-const popupNewPlace = document.querySelector('#popup-new-place');
+const profilePopup = document.querySelector('#popup-edit');
+const newPlacePopup = document.querySelector('#popup-new-place');
+
+const popupImage = document.querySelector('.popup__image');
+const popupImageCapture = document.querySelector('.popup__image-capture');
+const popupImageScaler = document.querySelector('#popup-image-scaler');
 
 const editFormElement = document.querySelector('#popup-edit-form');
 const addFormElement = document.querySelector('#popup-new-place-form');
@@ -18,11 +23,24 @@ const addFormElement = document.querySelector('#popup-new-place-form');
 const closeButtons = document.querySelectorAll('.popup__close-icon');
 const popups = document.querySelectorAll('.popup');
 
-initialCards.forEach((item) => {
-  const card = new Card(item, '#elements-template');
-  const cardElement = card.generateCard();
+const cardsGrid = document.querySelector('.elements');
 
-  document.querySelector('.elements').prepend(cardElement);
+function handleCardClick(name, link) {
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupImageCapture.textContent = name;
+  togglePopup(popupImageScaler);
+};
+
+function createCard(data) {
+  const card = new Card(data, '#elements-template', handleCardClick);
+  const cardElement = card.generateCard();
+  return cardElement
+};
+
+initialCards.forEach((item) => {
+  const cardElem = createCard(item);
+  cardsGrid.prepend(cardElem);
  });
 
 export function togglePopup(popup) {
@@ -31,47 +49,41 @@ export function togglePopup(popup) {
 };
 
 addButton.addEventListener('click', () => {
-  togglePopup(popupNewPlace);
+  togglePopup(newPlacePopup);
 });
 
 editButton.addEventListener('click', ()=> {
-  togglePopup(popupEdit);
-  editPopup();
+  togglePopup(profilePopup);
+  editProfileForm();
 });
 
-editFormElement.addEventListener('submit', editFormSubmit);
-addFormElement.addEventListener('submit', addFormSubmit);
+editFormElement.addEventListener('submit', submitProfileForm);
+addFormElement.addEventListener('submit', submitNewPlaceForm);
 
-function editPopup() {
+function editProfileForm() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
 };
 
-function editFormSubmit(evt) {
+function submitProfileForm(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
-  closePopup(popupEdit);
+  closePopup(profilePopup);
 };
 
-function addFormSubmit(evt) {
+function submitNewPlaceForm(evt) {
   evt.preventDefault();
   const cardData = {
     name: newPlace.value,
-    link: newPlaceLink.value,
+    link: newPlaceLink.value
   };
-  const card = new Card(cardData, '#elements-template');
-  document.querySelector('.elements').prepend(card.generateCard());
-  closePopup(popupNewPlace);
+  const newCard = createCard(cardData);
+  cardsGrid.prepend(newCard);
+  closePopup(newPlacePopup);
   addFormElement.reset();
-  const submitBtn = addFormElement.querySelector('.popup__submit-btn');
-  disableSubmitBtn(submitBtn);
+  formValidators['popup-new-place']._toggleButtonState();
 };
-
-function disableSubmitBtn (btn) {
-  btn.disabled = true;
-  btn.classList.add('popup__submit-btn_inactive');
-}
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -108,13 +120,17 @@ const options = {
   errorClass: 'popup__input-error_active'
 };
 
-function enableValidation(options) {
-  const formList = Array.from(document.querySelectorAll(options.formSelector));
+const formValidators = {}
+
+const enableValidation = (options) => {
+  const formList = Array.from(document.querySelectorAll(options.formSelector))
   formList.forEach((formElement) => {
-    const validate = new FormValidator(options, formElement);
-    validate.enableValidation(options);
+    const validator = new FormValidator(options, formElement)
+    const formName = formElement.getAttribute('name')
+    formValidators[formName] = validator;
+   validator.enableValidation();
   });
-}
+};
 
 enableValidation(options);
 
