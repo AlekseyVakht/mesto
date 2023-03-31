@@ -82,7 +82,7 @@ function submitNewPlaceForm(evt) {
   cardsGrid.prepend(newCard);
   closePopup(newPlacePopup);
   addFormElement.reset();
-  formValidators['popup-new-place']._toggleButtonState();
+  formValidators['popup-new-place'].toggleButtonState();
 };
 
 function closePopup(popup) {

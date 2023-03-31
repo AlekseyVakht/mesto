@@ -29,16 +29,16 @@ export class FormValidator {
   _setEventListeners() {
     this._inputList = Array.from(this._form.querySelectorAll(this._options.inputSelector));
     this._submitButton = this._form.querySelector(this._options.submitButtonSelector);
-    this._toggleButtonState();
+    this.toggleButtonState();
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._isValid(inputElement);
-        this._toggleButtonState();
+        this.toggleButtonState();
       });
     });
   }
 
-  _toggleButtonState() {
+  toggleButtonState() {
     const isFormValid = this._form.checkValidity()
     this._submitButton.disabled = !isFormValid
     this._submitButton.classList.toggle(this._options.inactiveButtonClass, !isFormValid)
