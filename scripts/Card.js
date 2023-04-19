@@ -20,8 +20,8 @@ export class Card {
     this._element = this._getTemplate();
     this._cardImage = this._element.querySelector('.element__image');
     this._cardImage.src = this._link;
-    this._cardImage.alt = this._name[0].toUpperCase() + this._name.slice(1);
-    this._element.querySelector('.element__heading').textContent = this._name[0].toUpperCase() + this._name.slice(1);
+    this._cardImage.alt = this._name;
+    this._element.querySelector('.element__heading').textContent = this._name;
     this._setEventListeners();
     return this._element;
   }
