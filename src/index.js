@@ -1,13 +1,12 @@
-import { FormValidator } from './FormValidator.js';
-import { Section } from './Section.js';
-import { Card } from './Card.js';
-import { PopupWithImage } from './PopupWithImage.js';
-import { PopupWithForm } from './PopupWithForm.js';
-import { UserInfo } from './UserInfo.js';
+import './pages/index.css';
+import { FormValidator } from './scripts/components/FormValidator.js';
+import { Section } from './scripts/components/Section.js';
+import { Card } from './scripts/components/Card.js';
+import { PopupWithImage } from './scripts/components/PopupWithImage.js';
+import { PopupWithForm } from './scripts/components/PopupWithForm.js';
+import { UserInfo } from './scripts/components/UserInfo.js';
 import {
   initialCards,
-  nameInput,
-  jobInput,
   editButton,
   addButton,
   profileName,
@@ -16,18 +15,9 @@ import {
   profileJobInput,
   newPlace,
   newPlaceLink,
-  profilePopup,
-  newPlacePopup,
-  popupImage,
-  popupImageCapture,
-  popupImageScaler,
-  editFormElement,
-  addFormElement,
-  closeButton,
-  popupElement,
   cardsGrid,
   options
-} from '../utils/constants.js';
+} from './scripts/utils/constants.js';
 
 const userPopup = new PopupWithForm(submitProfileForm, '#popup-edit');
 const placePopup = new PopupWithForm(submitNewPlaceForm, '#popup-new-place');
@@ -35,6 +25,7 @@ const userInfo = new UserInfo({userNameSelector: profileName, userJobSelector: p
 
 function submitProfileForm() {
   userInfo.setUserInfo(profileNameInput.value, profileJobInput.value);
+  console.log(userPopup)
 };
 
 
@@ -74,7 +65,6 @@ const cardList = new Section({
   cardsGrid
 );
 
-
 function submitNewPlaceForm() {
   addCard(
     {
@@ -84,7 +74,6 @@ function submitNewPlaceForm() {
   )
   console.log(cardList);
 };
-
 
 const formValidators = {}
 
