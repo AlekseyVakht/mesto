@@ -9,9 +9,7 @@ export class Section {
     this._container.prepend(elem);
   }
 
-  renderCard() {
-    this._renderedItems.forEach((item) => {
-      this._renderer(item);
-    });
+  renderCards() {
+    this._renderedItems.forEach(this._renderer);
   }
 }
