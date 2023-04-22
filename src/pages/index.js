@@ -22,12 +22,9 @@ import {
 
 const userPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
-  userInfo.setUserInfo({ 
-    firstname: formData.firstname,
-    about: formData.about
-  });
+  userInfo.setUserInfo(formData);
   },
-popupSelector: '#popup-edit'});
+  popupSelector: '#popup-edit'});
 userPopup.setEventListeners();
 
 
@@ -39,6 +36,7 @@ placePopup.setEventListeners();
 
 const userInfo = new UserInfo({userNameSelector: '.profile__name', userJobSelector: '.profile__description'});
 const imagePopup = new PopupWithImage('#popup-image-scaler');
+imagePopup.setEventListeners();
 
 function handleCardClick(name, link) {
   imagePopup.open({
