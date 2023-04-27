@@ -1,5 +1,5 @@
 import './index.css';
-import {Api} from '../scripts/components/Api.js';
+import { Api } from '../scripts/components/Api.js';
 import { FormValidator } from '../scripts/components/FormValidator.js';
 import { Section } from '../scripts/components/Section.js';
 import { Card } from '../scripts/components/Card.js';
