@@ -20,8 +20,8 @@ export class Api {
 
   getCards() {
     return fetch(`${this._baseUrl}cards`, {
-        headers: this._headers
-      })
+      headers: this._headers
+    })
       .then(res => this._isResOk(res))
   }
 
