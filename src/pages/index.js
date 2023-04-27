@@ -22,7 +22,7 @@ import {
 } from '../scripts/utils/constants.js';
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-64',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-64/',
   headers: {
     authorization: 'c1a078e3-d64c-4d67-b98e-d25e1a2a1b3f',
     'Content-Type': 'application/json'
