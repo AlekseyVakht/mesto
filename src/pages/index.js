@@ -30,6 +30,7 @@ const api = new Api({
 });
 
 api.getUserInfo();
+api.getCards();
 
 const userPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {

@@ -18,6 +18,13 @@ export class Api {
       .then(res => this._isResOk(res))
   }
 
+  getCards() {
+    return fetch(`${this._baseUrl}cards`, {
+        headers: this._headers
+      })
+      .then(res => this._isResOk(res))
+  }
+
   getInitialCards() {
   }
 }
