@@ -1,6 +1,6 @@
 .popup__submit-btn {
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 36px;
   cursor: pointer;
   font-family: inherit;
   font-weight: 400;

@@ -1,4 +1,5 @@
 import './index.css';
+import {Api} from '../scripts/components/Api.js';
 import { FormValidator } from '../scripts/components/FormValidator.js';
 import { Section } from '../scripts/components/Section.js';
 import { Card } from '../scripts/components/Card.js';
@@ -19,6 +20,16 @@ import {
   cardsGrid,
   options
 } from '../scripts/utils/constants.js';
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-64',
+  headers: {
+    authorization: 'c1a078e3-d64c-4d67-b98e-d25e1a2a1b3f',
+    'Content-Type': 'application/json'
+  }
+});
+
+api.getUserInfo();
 
 const userPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
