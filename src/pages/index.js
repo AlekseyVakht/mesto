@@ -49,13 +49,12 @@ const userPopup = new PopupWithForm({
 const avatarPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
     avatarPopup.loading(true, 'Сохранение...');
-
-  //   api.setUserAvatar(formData)
-  //     .then((res) => {
-  //       userInfo.setUserInfo(res);
-  //     })
-  //     .catch(err => console.log(err))
-  //     .finally(() => avatarPopup.loading(false))
+    api.setUserAvatar(formData)
+      .then((formData) => {
+        userInfo.setUserInfo(formData);
+      })
+      .catch(err => console.log(err))
+      .finally(() => avatarPopup.loading(false, 'Сохранить'))
   },
   popupSelector: '#popup-avatar-change'
 });
