@@ -47,14 +47,20 @@ const userInfo = new UserInfo({
 
 const userPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
-  userInfo.setUserInfo(formData);
+    userPopup.loading(true, 'Сохраняем...');
+    api.patchProfile(formData)
+      .then((formData) => {
+        userInfo.setUserInfo(formData);
+      })
+      .catch(err => console.log(err))
+      .finally(() => userPopup.loading(false, 'Сохранить'))
   },
   popupSelector: '#popup-edit'
 });
 
 const avatarPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
-    avatarPopup.loading(true, 'Сохранение...')
+    avatarPopup.loading(true, 'Сохранение...');
     api.setUserAvatar(formData)
       .then((formData) => {
         userInfo.setUserInfo(formData);
