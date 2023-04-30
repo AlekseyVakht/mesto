@@ -14,10 +14,10 @@ export class UserInfo {
   }
 
   setUserInfo(data) {
-    this._userName.textContent = data.name;
+    this._userName.textContent = data.firstname;
     this._userJob.textContent = data.about;
     this._userAvatar.src = data.avatar;
-    this._userAvatar.alt = data.name;
+    this._userAvatar.alt = data.firstname;
     this._id = data._id;
   }
 
