@@ -45,7 +45,7 @@ const avatarPopup = new PopupWithForm({
         userInfo.setUserInfo(res);
       })
       .catch(err => console.log(err))
-      .finally(() => popupChangeAvatar.renderLoading(false))
+      .finally(() => avatarPopup.loading(false))
   },
   popupSelector: '#popup-avatar-change'
 });
