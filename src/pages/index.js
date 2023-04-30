@@ -51,6 +51,7 @@ const userPopup = new PopupWithForm({
     api.patchProfile(formData)
       .then((formData) => {
         userInfo.setUserInfo(formData);
+        userPopup.close();
       })
       .catch(err => console.log(err))
       .finally(() => userPopup.loading(false, 'Сохранить'))
