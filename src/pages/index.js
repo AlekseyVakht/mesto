@@ -7,6 +7,7 @@ import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
 import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
 import { UserInfo } from '../scripts/components/UserInfo.js';
 import {
+  initialCards,
   avatarEditButton,
   editButton,
   addButton,
@@ -29,14 +30,14 @@ const api = new Api({
   }
 });
 
-Promise.all([api.getUserInfo(), api.getCards()])
-  .then(([userData, initialCards]) => {
-    userInfo.setUserInfo(userData);
-    cardsList.renderItems(initialCards);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// Promise.all([api.getUserInfo(), api.getCards()])
+//   .then(([userData, initialCards]) => {
+//     userInfo.setUserInfo(userData);
+//     cardList.renderItems(initialCards);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 const userPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
@@ -49,12 +50,12 @@ const avatarPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
     avatarPopup.loading(true, 'Сохранение...');
 
-    api.setUserAvatar(formData)
-      .then((res) => {
-        userInfo.setUserInfo(res);
-      })
-      .catch(err => console.log(err))
-      .finally(() => avatarPopup.loading(false))
+  //   api.setUserAvatar(formData)
+  //     .then((res) => {
+  //       userInfo.setUserInfo(res);
+  //     })
+  //     .catch(err => console.log(err))
+  //     .finally(() => avatarPopup.loading(false))
   },
   popupSelector: '#popup-avatar-change'
 });
@@ -86,14 +87,14 @@ function addCard(data) {
 }
 
 
-// const cardList = new Section({
-//   items: cardsData,
-//   renderer: (item) => {
-//     addCard(item);
-//     }
-//   },
-//   cardsGrid
-// );
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    addCard(item);
+    }
+  },
+  cardsGrid
+);
 
 const formValidators = {}
 
