@@ -13,7 +13,7 @@ export class Card {
     this._link = data.link;
 
     this._likes = data.likes;
-    this._id = data.id;
+    this._id = data._id;
     this._userId = userId;
     this._owner = data.owner;
 

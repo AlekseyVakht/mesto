@@ -105,8 +105,8 @@ function addCard(data) {
       deleteCardPopup.open();
       deleteCardPopup.loading(true, 'Удаляем...');
         api.deleteCardApi(card.getId())
-          .then((data) => {
-            card.deleteCard(data);
+          .then(() => {
+            card.deleteCard();
             deleteCardPopup.close();
           })
           .catch((err) => {
