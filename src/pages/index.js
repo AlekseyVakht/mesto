@@ -71,7 +71,7 @@ function addCard(data) {
 }
 
 const cardList = new Section({
-  items: initialCards,
+  items: api.getCards(),
   renderer: (item) => {
     addCard(item);
     }
