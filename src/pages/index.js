@@ -32,7 +32,7 @@ const api = new Api({
 
 Promise.all([api.getCards()])
   .then(([initialCards]) => {
-    cardList.renderItems(initialCards);
+    cardList.renderCards(initialCards);
   })
   .catch((err) => {
     console.log(err);
@@ -94,7 +94,6 @@ function addCard(data) {
 
 
 const cardList = new Section({
-  items: initialCards,
   renderer: (item) => {
     addCard(item);
     }
