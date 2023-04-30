@@ -58,7 +58,7 @@ export class Api {
         avatar: data.avatar
       })
     })
-    .then(res => this._isRestOk(res))
+    .then(res => this._isResOk(res))
   };
 
   likeCard(id, isLiked) {
@@ -69,10 +69,26 @@ export class Api {
     .then((res) => this._isResOk(res))
   }
 
-  deleteCard(cardId) {
+  deleteCardApi(cardId) {
     return fetch(`${this._baseUrl}cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers
+    })
+    .then(res => this._isResOk(res))
+  }
+
+  addCardLike() {
+    return fetch(`${this._url}cards/${this._id}/likes`, {
+      method: 'PUT',
+      headers: this._headers,
+    })
+    .then(res => this._isResOk(res))
+  }
+
+  removeCardLike() {
+    return fetch(`${this._url}cards/${this._id}/likes`, {
+      method: 'DELETE',
+      headers: this._headers,
     })
     .then(res => this._isResOk(res))
   }

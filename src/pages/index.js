@@ -30,7 +30,6 @@ const api = new Api({
   }
 });
 
-
 Promise.all([api.getCards()])
   .then(([initialCards]) => {
     cardList.renderCards(initialCards);
@@ -74,9 +73,16 @@ const avatarPopup = new PopupWithForm({
   popupSelector: '#popup-avatar-change'
 });
 
-const placePopup = new PopupWithForm({handleFormSubmit: (formData) => {
-  addCard(formData);
-  }, 
+const placePopup = new PopupWithForm({
+  handleFormSubmit: (formData) => {
+    placePopup.loading(true, 'Сохранение...');
+    api.postCard(formData)
+      .then((formData) => {
+        addCard(formData);
+      })
+      .catch(err => console.log(err))
+      .finally(() => placePopup.loading(false, 'Сохранить'))
+    }, 
   popupSelector: '#popup-new-place'
 });
 
@@ -90,24 +96,44 @@ function handleCardClick(name, link) {
     });
 };
 
-function handleCardDelete() {
-  deleteCardPopup.open();
-}
-
-function handleCardLike() {
-}
-
-function handleCardLikeRemove() {
-}
-
 function addCard(data) {
   const card = new Card({
     data: data,
     userId: userInfo.getUserId(),
     handleCardClick,
-    handleCardDelete,
-    handleCardLike,
-    handleCardLikeRemove
+    handleCardDelete: () => {
+      deleteCardPopup.open();
+      deleteCardPopup.loading(true, 'Удаляем...');
+        api.deleteCardApi(card.getId())
+          .then(() => {
+            card.deleteCard();
+            deleteCardPopup.close();
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => {
+            deleteCardPopup.loadin(false, 'Да');
+          });
+    },
+    handleCardLike: () => {
+      api.addCardLike(card.getId())
+        .then((data) => {
+          card.cardLiked(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      },
+    handleCardLikeRemove: () => {
+      api.removeCardLike(card.getId())
+        .then((data) => {
+          card.cardLiked(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
   }, '#elements-template');
   return cardList.addItem(card.generateCard());
 }
