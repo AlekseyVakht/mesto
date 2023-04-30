@@ -29,6 +29,15 @@ const api = new Api({
   }
 });
 
+Promise.all([api.getUserInfo(), api.getCards()])
+  .then(([userData, initialCards]) => {
+    userInfo.setUserInfo(userData);
+    cardsList.renderItems(initialCards);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 const userPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
   userInfo.setUserInfo(formData);
@@ -76,17 +85,15 @@ function addCard(data) {
   return cardList.addItem(card.generateCard());
 }
 
-const cardsA = api.getCards();
-const cardsData = JSON.parse(cardsA);
 
-const cardList = new Section({
-  items: cardsData,
-  renderer: (item) => {
-    addCard(item);
-    }
-  },
-  cardsGrid
-);
+// const cardList = new Section({
+//   items: cardsData,
+//   renderer: (item) => {
+//     addCard(item);
+//     }
+//   },
+//   cardsGrid
+// );
 
 const formValidators = {}
 
