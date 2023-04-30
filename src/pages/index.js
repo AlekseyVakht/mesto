@@ -39,6 +39,12 @@ const api = new Api({
 //     console.log(err);
 //   });
 
+const userInfo = new UserInfo({
+  userNameSelector: '.profile__name', 
+  userJobSelector: '.profile__description',
+  userAvatarSelector: '.profile__avatar'
+});
+
 const userPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
   userInfo.setUserInfo(formData);
@@ -48,7 +54,7 @@ const userPopup = new PopupWithForm({
 
 const avatarPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
-    avatarPopup.loading(true, 'Сохранение...');
+    avatarPopup.loading(true, 'Сохранение...')
     api.setUserAvatar(formData)
       .then((formData) => {
         userInfo.setUserInfo(formData);
@@ -63,11 +69,6 @@ const placePopup = new PopupWithForm({handleFormSubmit: (formData) => {
   addCard(formData);
   }, 
   popupSelector: '#popup-new-place'
-});
-
-const userInfo = new UserInfo({
-  userNameSelector: '.profile__name', 
-  userJobSelector: '.profile__description'
 });
 
 const imagePopup = new PopupWithImage('#popup-image-scaler');

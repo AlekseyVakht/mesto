@@ -15,7 +15,6 @@ export class Api {
     return fetch(`${this._baseUrl}users/me`, {
       headers: this._headers
     })
-      .then((res) => res.json())
       .then(res => this._isResOk(res))
   }
 

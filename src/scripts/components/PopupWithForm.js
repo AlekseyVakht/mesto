@@ -33,11 +33,12 @@ export class PopupWithForm extends Popup {
   }
 
   loading(isLoading, text) {
-    this._initText = this._submitBtnText;
     if (isLoading) {
       this._submitBtnText = text;
+      this._submitBtn.disabled = true;
   } else {
     this._submitBtnText = text;
+    this._submitBtn.disabled = false;
   }
   }
 }
