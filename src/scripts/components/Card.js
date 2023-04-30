@@ -58,7 +58,6 @@ export class Card {
 
   deleteCard() {
     this._element.remove();
-    this._element = null;
   }
 
   cardLiked(data) {
@@ -80,6 +79,8 @@ export class Card {
   _checkUserDeleteState() {
     if (this._owner !== this._userId) {
       this._deleteIcon.remove();
+    } else {
+      this._deleteIcon.append(this._element);
     }
   }
 
