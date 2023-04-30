@@ -39,7 +39,10 @@ export class Api {
     return fetch(`${this._baseUrl}cards`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link,
+      }),
     })
     .then(res => this._isResOk(res))
   };
