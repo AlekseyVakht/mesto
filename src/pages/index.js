@@ -76,7 +76,8 @@ function addCard(data) {
   return cardList.addItem(card.generateCard());
 }
 
-const cardsData = JSON.parse(api.getCards());
+const cardsA = api.getCards();
+const cardsData = JSON.parse(cardsA);
 
 const cardList = new Section({
   items: cardsData,
