@@ -50,7 +50,7 @@ export class Api {
     .then(res => this._isResOk(res))
   };
 
-  setUserAvatar(data) {
+  setAvatar(data) {
     return fetch(`${this._baseUrl}users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,

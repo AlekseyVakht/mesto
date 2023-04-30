@@ -62,9 +62,9 @@ const userPopup = new PopupWithForm({
 const avatarPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
     avatarPopup.loading(true, 'Сохранение...');
-    api.setUserAvatar(formData)
+    api.setAvatar(formData)
       .then((formData) => {
-        userInfo.setUserInfo(formData);
+        userInfo.setUserAvatar(formData);
       })
       .catch(err => console.log(err))
       .finally(() => avatarPopup.loading(false, 'Сохранить'))
