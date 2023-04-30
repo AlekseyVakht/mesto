@@ -56,8 +56,8 @@ const imagePopup = new PopupWithImage('#popup-image-scaler');
 
 function renderPage() {
   Promise.all([
-    api.getCard(),
-    api.getProfile()
+    api.getCards(),
+    api.getUserInfo()
   ])
   .then(([cardRes, profileRes]) => {
     userId = profileRes._id;
