@@ -15,6 +15,7 @@ export class Api {
     return fetch(`${this._baseUrl}users/me`, {
       headers: this._headers
     })
+      .then((res) => res.json())
       .then(res => this._isResOk(res))
   }
 
@@ -22,9 +23,7 @@ export class Api {
     fetch(`${this._baseUrl}cards`, {
       headers: this._headers
     })
-      .then((res) => {
-        return res.json()
-      })
+      .then((res) => res.json())
       .then(res => this._isResOk(res))
   }
 
