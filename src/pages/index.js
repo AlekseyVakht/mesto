@@ -37,7 +37,16 @@ const userPopup = new PopupWithForm({
 });
 
 const avatarPopup = new PopupWithForm({
-  handleFormSubmit: (formData) => {},
+  handleFormSubmit: (formData) => {
+    avatarPopup.loading(true, 'Сохранение...');
+
+    api.setUserAvatar(formData)
+      .then((res) => {
+        userInfo.setUserInfo(res);
+      })
+      .catch(err => console.log(err))
+      .finally(() => popupChangeAvatar.renderLoading(false))
+  },
   popupSelector: '#popup-avatar-change'
 });
 
@@ -53,19 +62,6 @@ const userInfo = new UserInfo({
 });
 
 const imagePopup = new PopupWithImage('#popup-image-scaler');
-
-function renderPage() {
-  Promise.all([
-    api.getCards(),
-    api.getUserInfo()
-  ])
-  .then(([cardRes, profileRes]) => {
-    userId = profileRes._id;
-    cardList.render(cardRes)
-    userInfo.setUserInfo(profileRes)
-  })
-  .catch(err => console.log(err))
-};
 
 function handleCardClick(name, link) {
   imagePopup.open({
@@ -123,6 +119,5 @@ avatarPopup.setEventListeners();
 placePopup.setEventListeners();
 imagePopup.setEventListeners();
 
-renderPage();
 cardList.renderCards();
 enableValidation(options);
