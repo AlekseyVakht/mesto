@@ -30,6 +30,7 @@ export const jobInput = document.querySelector('.popup__form-item_input_job');
 
 export const editButton = document.querySelector('.profile__edit-btn');
 export const addButton = document.querySelector('.profile__add-btn');
+export const avatarEditButton = document.querySelector('.profile__avatar-edit-btn');
 
 export const profileName = document.querySelector('.profile__name');
 export const profileDescription = document.querySelector('.profile__description');

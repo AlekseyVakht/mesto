@@ -7,7 +7,7 @@ import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
 import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
 import { UserInfo } from '../scripts/components/UserInfo.js';
 import {
-  initialCards,
+  avatarEditButton,
   editButton,
   addButton,
   profileName,
@@ -29,26 +29,43 @@ const api = new Api({
   }
 });
 
-api.getUserInfo();
-api.getCards();
-
 const userPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
   userInfo.setUserInfo(formData);
   },
-  popupSelector: '#popup-edit'});
-userPopup.setEventListeners();
+  popupSelector: '#popup-edit'
+});
 
+const avatarPopup = new PopupWithForm({
+  handleFormSubmit: (formData) => {},
+  popupSelector: '#popup-avatar-change'
+});
 
 const placePopup = new PopupWithForm({handleFormSubmit: (formData) => {
   addCard(formData);
   }, 
-  popupSelector: '#popup-new-place'});
-placePopup.setEventListeners();
+  popupSelector: '#popup-new-place'
+});
 
-const userInfo = new UserInfo({userNameSelector: '.profile__name', userJobSelector: '.profile__description'});
+const userInfo = new UserInfo({
+  userNameSelector: '.profile__name', 
+  userJobSelector: '.profile__description'
+});
+
 const imagePopup = new PopupWithImage('#popup-image-scaler');
-imagePopup.setEventListeners();
+
+function renderPage() {
+  Promise.all([
+    api.getCard(),
+    api.getProfile()
+  ])
+  .then(([cardRes, profileRes]) => {
+    userId = profileRes._id;
+    cardList.render(cardRes)
+    userInfo.setUserInfo(profileRes)
+  })
+  .catch(err => console.log(err))
+};
 
 function handleCardClick(name, link) {
   imagePopup.open({
@@ -57,13 +74,6 @@ function handleCardClick(name, link) {
     text: name
     });
 };
-
-editButton.addEventListener('click', ()=> {
-  userPopup.open();
-  const userData = userInfo.getUserInfo();
-  profileNameInput.value = userData.firstname;
-  profileJobInput.value = userData.about;
-});
 
 function addCard(data) {
   const card = new Card(data, '#elements-template', handleCardClick);
@@ -91,10 +101,28 @@ const enableValidation = (options) => {
   });
 };
 
+editButton.addEventListener('click', ()=> {
+  userPopup.open();
+  const userData = userInfo.getUserInfo();
+  profileNameInput.value = userData.firstname;
+  profileJobInput.value = userData.about;
+});
+
 addButton.addEventListener('click', () => {
   placePopup.open();
   formValidators['popup-new-place'].toggleButtonState();
 });
 
+avatarEditButton.addEventListener('click', () => {
+  avatarPopup.open();
+  formValidators['popup-avatar'].toggleButtonState();
+});
+
+userPopup.setEventListeners();
+avatarPopup.setEventListeners();
+placePopup.setEventListeners();
+imagePopup.setEventListeners();
+
+renderPage();
 cardList.renderCards();
 enableValidation(options);
