@@ -1,8 +1,11 @@
-import { PopupWithForm } from './PopupWithForm.js';
+import { Popup } from './Popup.js';
 
-export class PopupWithConfirm extends PopupWithForm {
-  constructor({handleFormSubmit, popupSelector}) {
-    super({handleFormSubmit, popupSelector});
+export class PopupWithConfirm extends Popup {
+  constructor(popupSelector) {
+    super(popupSelector);
+    this._form = this._popup.querySelector('#popup-confirm-form');
+    this._submitBtn = this._form.querySelector('.popup__submit-btn');
+    this._submitBtnText = this._submitBtn.textContent;
   }
 
   setEventListeners() {
@@ -12,5 +15,15 @@ export class PopupWithConfirm extends PopupWithForm {
       this._handleFormSubmit();
       this.close();
     });
+  }
+
+  loading(isLoading, text) {
+    if (isLoading) {
+      this._submitBtnText = text;
+      this._submitBtn.disabled = true;
+    } else {
+      this._submitBtnText = text;
+      this._submitBtn.disabled = false;
+    }
   }
 }

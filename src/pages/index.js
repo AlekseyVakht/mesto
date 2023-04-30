@@ -45,9 +45,7 @@ const userInfo = new UserInfo({
   userAvatarSelector: '.profile__avatar'
 });
 
-const deleteCardPopup = new PopupWithConfirm({
-  handleFormSubmit: 
-})
+const deleteCardPopup = new PopupWithConfirm('.popup-confirm');
 
 const userPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
