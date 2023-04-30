@@ -20,10 +20,9 @@ export class Api {
   }
 
   getCards() {
-    fetch(`${this._baseUrl}cards`, {
+    return fetch(`${this._baseUrl}cards`, {
       headers: this._headers
     })
-      .then((res) => res.json())
       .then(res => this._isResOk(res))
   }
 
