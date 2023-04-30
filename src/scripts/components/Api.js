@@ -19,9 +19,12 @@ export class Api {
   }
 
   getCards() {
-    return fetch(`${this._baseUrl}cards`, {
+    fetch(`${this._baseUrl}cards`, {
       headers: this._headers
     })
+      .then((res) => {
+        return res.json()
+      })
       .then(res => this._isResOk(res))
   }
 
@@ -43,12 +46,12 @@ export class Api {
     .then(res => this._isResOk(res))
   };
 
-  setUserAvatar({link}) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
+  setUserAvatar(data) {
+    return fetch(`${this._baseUrl}users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: link
+        avatar: data.link
       })
     })
     .then(res => this._isRestOk(res))
