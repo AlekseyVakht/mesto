@@ -5,6 +5,7 @@ import { Section } from '../scripts/components/Section.js';
 import { Card } from '../scripts/components/Card.js';
 import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
 import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
+import { PopupWithConfirm } from '../scripts/components/PopupWithConfirm.js';
 import { UserInfo } from '../scripts/components/UserInfo.js';
 import {
   avatarEditButton,
@@ -43,6 +44,10 @@ const userInfo = new UserInfo({
   userJobSelector: '.profile__description',
   userAvatarSelector: '.profile__avatar'
 });
+
+const deleteCardPopup = new PopupWithConfirm({
+  handleFormSubmit: 
+})
 
 const userPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
@@ -87,8 +92,25 @@ function handleCardClick(name, link) {
     });
 };
 
+function handleCardDelete() {
+  deleteCardPopup.open();
+}
+
+function handleCardLike() {
+}
+
+function handleCardLikeRemove() {
+}
+
 function addCard(data) {
-  const card = new Card(data, '#elements-template', handleCardClick);
+  const card = new Card({
+    data: data,
+    userId: userInfo.getUserId(),
+    handleCardClick,
+    handleCardDelete,
+    handleCardLike,
+    handleCardLikeRemove
+  }, '#elements-template');
   return cardList.addItem(card.generateCard());
 }
 
@@ -130,6 +152,7 @@ avatarEditButton.addEventListener('click', () => {
   formValidators['popup-avatar'].toggleButtonState();
 });
 
+deleteCardPopup.setEventListeners();
 userPopup.setEventListeners();
 avatarPopup.setEventListeners();
 placePopup.setEventListeners();

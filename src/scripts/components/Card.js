@@ -1,9 +1,27 @@
 export class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor({
+      data,
+      userId,
+      handleCardClick,
+      handleCardDelete,
+      handleCardLike,
+      handleCardLikeRemove
+    },
+      templateSelector) {
+
     this._name = data.name;
     this._link = data.link;
+
+    this._like = data.likes;
+    this._id = data.id;
+    this._userId = userId;
+    this._owner = data.owner;
+
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleCardDelete = handleCardDelete;
+    this._handleCardLike = handleCardLike;
+    this._handleCardLikeRemove = handleCardLikeRemove;
   }
 
   _getTemplate() {
@@ -18,6 +36,11 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+
+    this._deleteIcon = this._element.querySelector('.element__delete-icon');
+    this._likeIcon = this._element.querySelector('.element__like-icon');
+    this._likeCounter = this._element.querySelector('.element__like-counter');
+
     this._cardImage = this._element.querySelector('.element__image');
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
@@ -26,16 +49,51 @@ export class Card {
     return this._element;
   }
 
+  getId() {
+    return this._id;
+  }
+
+  deleteCard() {
+    this._element.remove();
+    this._element = null;
+  }
+
+  _isCardLiked() {
+    if (
+      this._likes.some((user) => {
+        return this._userId === user._id;
+      })
+    ) {
+      this._elementLike.classList.add('element__like-icon_active');
+    }
+  }
+
+  _checkUserDeleteState() {
+    if (this._owner !== this._userId) {
+      this._deleteIcon.remove();
+    }
+  }
+
+  _changeLikeState() {
+    if (this._elementLike.classList.contains('element__like-icon_active')) {
+      this._handleCardLikeRemove(this._id);
+    } else {
+      this._handleCardLike(this._id);
+    }
+  }
+
   _setEventListeners() {
-    this._element.querySelector('.element__delete-icon').addEventListener('click', this._deleteCard);
-    this._element.querySelector('.element__like-icon').addEventListener('click', this._toggleLike);
+    this._deleteIcon.addEventListener('click', () => {
+      this._handleCardDelete()
+    });
+
+    this._likeIcon.addEventListener('click', () => {
+      this._changeLikeState();
+    });
+    
     this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)
     });
-  }
-
-  _deleteCard(evt) {
-    evt.target.closest('.element').remove();
   }
 
   _toggleLike(evt) {
