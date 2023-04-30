@@ -61,7 +61,7 @@ export class Card {
   cardLiked(data) {
     this._likes = data.likes;
     this._likeIcon.classList.toggle('element__like-icon_active');
-    this._likesCounter.textContent = this._likes.length;
+    this._likeCounter.textContent = this._likes.length;
   }
 
   _isCardLiked() {

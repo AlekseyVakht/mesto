@@ -61,32 +61,32 @@ export class Api {
     .then(res => this._isResOk(res))
   };
 
-  likeCard(id, isLiked) {
-    return fetch(`${this._baseUrl}cards/${id}/likes`, {
+  likeCard(data, isLiked) {
+    return fetch(`${this._baseUrl}cards/${data.id}/likes`, {
       method: isLiked ? 'DELETE' : 'PUT',
       headers: this._headers
     })
     .then((res) => this._isResOk(res))
   }
 
-  deleteCardApi(cardId) {
-    return fetch(`${this._baseUrl}cards/${cardId}`, {
+  deleteCardApi(data) {
+    return fetch(`${this._baseUrl}cards/${data.id}`, {
       method: 'DELETE',
       headers: this._headers
     })
     .then(res => this._isResOk(res))
   }
 
-  addCardLike() {
-    return fetch(`${this._url}cards/${this._id}/likes`, {
+  addCardLike(data) {
+    return fetch(`${this._baseUrl}cards/${data.id}/likes`, {
       method: 'PUT',
       headers: this._headers,
     })
     .then(res => this._isResOk(res))
   }
 
-  removeCardLike() {
-    return fetch(`${this._url}cards/${this._id}/likes`, {
+  removeCardLike(data) {
+    return fetch(`${this._baseUrl}cards/${data.id}/likes`, {
       method: 'DELETE',
       headers: this._headers,
     })

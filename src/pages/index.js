@@ -105,36 +105,36 @@ function addCard(data) {
       deleteCardPopup.open();
       deleteCardPopup.loading(true, 'Удаляем...');
         api.deleteCardApi(card.getId())
-          .then(() => {
-            card.deleteCard();
+          .then((data) => {
+            card.deleteCard(data);
             deleteCardPopup.close();
           })
           .catch((err) => {
             console.log(err);
           })
           .finally(() => {
-            deleteCardPopup.loadin(false, 'Да');
-          });
-    },
-    handleCardLike: () => {
-      api.addCardLike(card.getId())
-        .then((data) => {
-          card.cardLiked(data);
-        })
-        .catch((err) => {
-          console.log(err);
+            deleteCardPopup.loading(false, 'Да');
         });
       },
-    handleCardLikeRemove: () => {
-      api.removeCardLike(card.getId())
-        .then((data) => {
-          card.cardLiked(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      }
-  }, '#elements-template');
+      handleCardLike: () => {
+        api.addCardLike(card.getId())
+          .then((data) => {
+            card.cardLiked(data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        },
+      handleCardLikeRemove: () => {
+        api.removeCardLike(card.getId())
+          .then((data) => {
+            card.cardLiked(data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        }
+    }, '#elements-template');
   return cardList.addItem(card.generateCard());
 }
 
