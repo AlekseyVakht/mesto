@@ -30,7 +30,10 @@ export class Api {
     return fetch(`${this._baseUrl}users/me`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about
+      }),
     })
       .then(res => this._isResOk(res))
   }
