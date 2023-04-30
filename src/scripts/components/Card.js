@@ -40,12 +40,15 @@ export class Card {
     this._deleteIcon = this._element.querySelector('.element__delete-icon');
     this._likeIcon = this._element.querySelector('.element__like-icon');
     this._likeCounter = this._element.querySelector('.element__like-counter');
-
+    
     this._cardImage = this._element.querySelector('.element__image');
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._element.querySelector('.element__heading').textContent = this._name;
     this._setEventListeners();
+
+    this._isCardLiked();
+    this._checkUserDeleteState();
     return this._element;
   }
 
