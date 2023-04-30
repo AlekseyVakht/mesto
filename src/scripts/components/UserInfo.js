@@ -7,17 +7,17 @@ export class UserInfo {
 
   getUserInfo() {
     return {
-      firstname: this._userName.textContent,
+      name: this._userName.textContent,
       about: this._userJob.textContent,
       avatar: this._userAvatar
     }
   }
 
   setUserInfo(data) {
-    this._userName.textContent = data.firstname;
+    this._userName.textContent = data.name;
     this._userJob.textContent = data.about;
     this._userAvatar.src = data.avatar;
-    this._userAvatar.alt = data.firstname;
+    this._userAvatar.alt = data.name;
     this._id = data._id;
   }
 
