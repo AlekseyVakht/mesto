@@ -7,7 +7,6 @@ import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
 import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
 import { UserInfo } from '../scripts/components/UserInfo.js';
 import {
-  initialCards,
   avatarEditButton,
   editButton,
   addButton,
@@ -30,14 +29,14 @@ const api = new Api({
   }
 });
 
-// Promise.all([api.getUserInfo(), api.getCards()])
-//   .then(([userData, initialCards]) => {
-//     userInfo.setUserInfo(userData);
-//     cardList.renderItems(initialCards);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
+
+Promise.all([api.getCards()])
+  .then(([initialCards]) => {
+    cardList.renderItems(initialCards);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const userInfo = new UserInfo({
   userNameSelector: '.profile__name', 
@@ -137,5 +136,4 @@ avatarPopup.setEventListeners();
 placePopup.setEventListeners();
 imagePopup.setEventListeners();
 
-cardList.renderCards();
 enableValidation(options);
