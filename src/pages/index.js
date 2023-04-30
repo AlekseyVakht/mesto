@@ -118,7 +118,7 @@ const enableValidation = (options) => {
 editButton.addEventListener('click', ()=> {
   userPopup.open();
   const userData = userInfo.getUserInfo();
-  profileNameInput.value = userData.firstname;
+  profileNameInput.value = userData.name;
   profileJobInput.value = userData.about;
 });
 
