@@ -45,7 +45,7 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._element.querySelector('.element__heading').textContent = this._name;
-
+    this._checkUserDeleteState();
     this._setEventListeners();
     return this._element;
   }
@@ -73,7 +73,7 @@ export class Card {
   }
 
   _checkUserDeleteState() {
-    if (this._userId !== this._owner) {
+    if (this._userId === this._owner) {
       this._deleteIcon.classList.add('element__delete-icon_active');
     }
   }
@@ -88,7 +88,6 @@ export class Card {
 
   _setEventListeners() {
     this._deleteIcon.addEventListener('click', () => {
-      this._checkUserDeleteState();
       this._handleCardDelete();
     });
 
