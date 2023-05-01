@@ -32,7 +32,7 @@ const api = new Api({
 
 const userID = '';
 
-Promise.all([api.getUserInfo(), api.getCards()])
+Promise.all([api.getUserInfoApi(), api.getCards()])
   .then(([userData, initialCards]) => {
     userID = userData._id;
     userInfo.setUserInfo(userData);
