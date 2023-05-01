@@ -48,7 +48,7 @@ const deleteCardPopup = new PopupWithConfirm('#popup-with-confirm');
 
 const userPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
-    userPopup.loading(true, 'Сохраняем...');
+    userPopup.loading(true)
     api.patchProfile(formData)
       .then((formData) => {
         userInfo.setUserInfo(formData);
@@ -56,7 +56,7 @@ const userPopup = new PopupWithForm({
       })
       .catch(err => console.log(err))
       .finally(() => {
-        userPopup.loading(false, 'Сохранить')
+        userPopup.loading(false)
       });
     },
   popupSelector: '#popup-edit'
@@ -64,14 +64,14 @@ const userPopup = new PopupWithForm({
 
 const avatarPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
-    avatarPopup.loading(true, 'Сохранение...');
+    avatarPopup.loading(true);
     api.setAvatar(formData)
       .then((formData) => {
         userInfo.setUserAvatar(formData);
       })
       .catch(err => console.log(err))
       .finally(() => {
-        avatarPopup.loading(false, 'Сохранить')
+        avatarPopup.loading(false)
       });
     },
   popupSelector: '#popup-avatar-change'
@@ -79,13 +79,14 @@ const avatarPopup = new PopupWithForm({
 
 const placePopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
+    placePopup.loading(true)
     api.postCard(formData)
       .then((formData) => {
         addCard(formData);
       })
       .catch(err => console.log(err))
       .finally(() => {
-        placePopup.loading(false, 'Сохранить')
+        placePopup.loading(false)
       });
     }, 
   popupSelector: '#popup-new-place'

@@ -9,6 +9,7 @@ export class Card {
     },
       templateSelector) {
 
+    this.data = data;
     this._name = data.name;
     this._link = data.link;
 
@@ -46,6 +47,8 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._element.querySelector('.element__heading').textContent = this._name;
+    this.showLikes(this.data)
+
     if (this._userIdCard !== this._userId) {
       this._deleteIcon.remove();
     }
@@ -62,17 +65,24 @@ export class Card {
     this._element = null;
   }
 
-  cardLiked(data) {
-    this._isCardLiked();
-    this._likes = data.likes;
-    this._likeIcon.classList.toggle('element__like-icon_active');
-    this._likeCounter.textContent = this._likes.length;
+  cardLike() {
+    return this._likes.find((data) => data._id === this._userId)
   }
 
-  _isCardLiked() {
-    return this._likes.some((user) => {
-      return this._userId === user._id;
-    })
+  showLikes(card){
+    this._likes = card.likes
+    if (this._likes.length === 0) {
+      this._likeCounter.textContent = ''
+    }
+    else {
+      this._likeCounter.textContent = this._likes.length
+    }
+    if (this.cardLike()) {
+      this._likeIcon.classList.add('card__button_active')
+    }
+    else {
+      this._likeIcon.classList.remove('card__button_active')
+    }
   }
 
   _changeLikeState() {

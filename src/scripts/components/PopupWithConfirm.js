@@ -16,17 +16,16 @@ export class PopupWithConfirm extends Popup {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this.loading(true, 'Удаляем...');
       this._handleSubmit();
       this.close();
     });
   }
 
-  loading(isLoading, text) {
+  loading(isLoading) {
     if (isLoading) {
-      this._submitBtnText = text;
+      this._submitBtn.textContent = 'Удаляем...';
     } else {
-      this._submitBtnText = text;
+      this._submitBtn.textContent = this._submitBtnText;
     }
   }
 }
