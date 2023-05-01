@@ -45,7 +45,6 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._element.querySelector('.element__heading').textContent = this._name;
-    this._checkDeleteIcon();
     this._setEventListeners();
     return this._element;
   }
