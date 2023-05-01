@@ -107,11 +107,11 @@ function addCard(data) {
     data: data,
     userId: userInfo.getUserId(),
     handleCardClick,
-    handleCardDelete: () => {
+    handleCardDelete: (cardID) => {
       deleteCardPopup.open();
       deleteCardPopup.setSubmit(() => {
         deleteCardPopup.loading(true);
-        api.deleteCardApi(card.getId())
+        api.deleteCardApi(cardID)
           .then(() => {
             deleteCardPopup.close();
           })
@@ -123,8 +123,8 @@ function addCard(data) {
           });
        });
       },
-      handleCardLike: () => {
-        api.addCardLike(card.getId())
+      handleCardLike: (cardID) => {
+        api.addCardLike(cardID)
           .then((data) => {
             card.showLikes(data);
           })
@@ -132,8 +132,8 @@ function addCard(data) {
             console.log(err);
           });
         },
-      handleCardLikeRemove: () => {
-        api.removeCardLike(card.getId())
+      handleCardLikeRemove: (cardID) => {
+        api.removeCardLike(cardID)
           .then((data) => {
             card.showLikes(data);
           })

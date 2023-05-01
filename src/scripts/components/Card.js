@@ -14,7 +14,7 @@ export class Card {
     this._link = data.link;
 
     this._likes = data.likes;
-    this._id = data._id;
+    this.idCard = data._id;
     this._userId = userId;
     this._owner = data.owner;
     this._userIdCard = data.owner._id;
@@ -78,18 +78,18 @@ export class Card {
       this._likeCounter.textContent = this._likes.length
     }
     if (this.cardLike()) {
-      this._likeIcon.classList.add('element__like-icon')
+      this._likeIcon.classList.add('element__like-icon_active')
     }
     else {
-      this._likeIcon.classList.remove('element__like-icon')
+      this._likeIcon.classList.remove('element__like-icon_active')
     }
   }
 
   clickLike() {
     if (this.cardLike()) {
-      this._handleCardLikeRemove(this._id);
+      this._handleCardLikeRemove(this.idCard);
     } else {
-      this._handleCardLike(this._id);
+      this._handleCardLike(this.idCard);
     }
   }
 
