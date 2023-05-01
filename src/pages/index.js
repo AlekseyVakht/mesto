@@ -44,7 +44,7 @@ const userInfo = new UserInfo({
   userAvatarSelector: '.profile__avatar'
 });
 
-const deleteCardPopup = new PopupWithConfirm('#popup-with-confirm');
+const deleteCardPopup = new PopupWithConfirm(handleCardDelete, '#popup-with-confirm');
 
 const userPopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
@@ -102,26 +102,28 @@ function handleCardClick(name, link) {
     });
 };
 
+function handleCardDelete() {
+  deleteCardPopup.open();
+  deleteCardPopup.loading(true, 'Удаляем...');
+    api.deleteCardApi(card.getId())
+      .then(() => {
+        card.deleteCard();
+        deleteCardPopup.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        deleteCardPopup.loading(false, 'Да');
+      });
+}
+
 function addCard(data) {
   const card = new Card({
     data: data,
     userId: userInfo.getUserId(),
     handleCardClick,
-    handleCardDelete: () => {
-      deleteCardPopup.open();
-      deleteCardPopup.loading(true, 'Удаляем...');
-        api.deleteCardApi(card.getId())
-          .then(() => {
-            card.deleteCard();
-            deleteCardPopup.close();
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-          .finally(() => {
-            deleteCardPopup.loading(false, 'Да');
-        });
-      },
+    handleCardDelete,
       handleCardLike: () => {
         api.addCardLike(card.getId())
           .then((data) => {
