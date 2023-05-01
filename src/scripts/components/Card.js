@@ -45,10 +45,10 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._element.querySelector('.element__heading').textContent = this._name;
-    this._setEventListeners();
-
-    this._isCardLiked();
     this._checkUserDeleteState();
+
+    this._setEventListeners();
+    this._isCardLiked();
     return this._element;
   }
 
@@ -58,6 +58,7 @@ export class Card {
 
   deleteCard() {
     this._element.remove();
+    this._element = null;
   }
 
   cardLiked(data) {
@@ -67,13 +68,9 @@ export class Card {
   }
 
   _isCardLiked() {
-    if (
-      this._likes.some((user) => {
-        return this._userId === user._id;
-      })
-    ) {
-      this._likeIcon.classList.add('element__like-icon_active');
-    }
+    return this._likes.some((user) => {
+      return this._userId === user._id;
+    })
   }
 
   _checkUserDeleteState() {
@@ -92,7 +89,7 @@ export class Card {
 
   _setEventListeners() {
     this._deleteIcon.addEventListener('click', () => {
-      this.deleteCard();
+      this._handleCardDelete();
     });
 
     this._likeIcon.addEventListener('click', () => {
