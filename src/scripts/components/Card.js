@@ -16,6 +16,7 @@ export class Card {
     this._id = data._id;
     this._userId = userId;
     this._owner = data.owner;
+    this._userIdCard = data.owner._id;
 
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
@@ -45,6 +46,9 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._element.querySelector('.element__heading').textContent = this._name;
+    if (this._userIdCard !== this._userId) {
+      this._deleteIcon.remove();
+    }
     this._setEventListeners();
     return this._element;
   }
@@ -69,12 +73,6 @@ export class Card {
     return this._likes.some((user) => {
       return this._userId === user._id;
     })
-  }
-
-  checkDeleteIcon(userId) {
-    if (this._userId === userId) {
-      this._deleteIcon.classList.add('element__delete-icon_active');
-    }
   }
 
   _changeLikeState() {

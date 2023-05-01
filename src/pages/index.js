@@ -30,7 +30,7 @@ const api = new Api({
   }
 });
 
-Promise.all([api.getCards()])
+Promise.all([api.getUserInfoApi(), api.getCards()])
   .then(([initialCards]) => {
     cardList.renderCards(initialCards);
   })
@@ -113,7 +113,6 @@ function addCard(data) {
         deleteCardPopup.loading(true, 'Удаляем...');
         api.deleteCardApi(card.getId())
           .then(() => {
-            card.checkDeleteIcon(userId);
             card.deleteCard();
             deleteCardPopup.close();
           })
