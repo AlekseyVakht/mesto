@@ -107,7 +107,8 @@ function addCard(data) {
     data: data,
     userId: userInfo.getUserId(),
     handleCardClick,
-    handleCardDelete: () => {  
+    handleCardDelete: () => {
+      card.addDeleteIcon();
       deleteCardPopup.open();
       deleteCardPopup.setSubmit(() => {
         deleteCardPopup.loading(true, 'Удаляем...');

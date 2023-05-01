@@ -72,10 +72,8 @@ export class Card {
     })
   }
 
-  _checkUserDeleteState() {
-    if (this._userId === this._owner) {
-      this._deleteIcon.classList.add('element__delete-icon_active');
-    }
+  addDeleteIcon() {
+    this._deleteIcon.classList.add('element__delete-icon_active');
   }
 
   _changeLikeState() {

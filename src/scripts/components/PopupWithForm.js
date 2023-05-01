@@ -34,11 +34,9 @@ export class PopupWithForm extends Popup {
 
   loading(isLoading, text) {
     if (isLoading) {
-      this._submitBtnText = text;
-      this._submitBtn.disabled = true;
+      this._submitBtn = text;
   } else {
-    this._submitBtnText = text;
-    this._submitBtn.disabled = false;
+    this._submitBtn = text;
   }
   }
 }
