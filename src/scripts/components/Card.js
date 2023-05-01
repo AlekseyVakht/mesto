@@ -52,6 +52,7 @@ export class Card {
     if (this._userIdCard !== this._userId) {
       this._deleteIcon.classList.remove();
     }
+    
     this._setEventListeners();
     return this._element;
   }

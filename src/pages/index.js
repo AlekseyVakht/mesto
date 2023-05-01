@@ -30,8 +30,12 @@ const api = new Api({
   }
 });
 
-Promise.all([api.getCards()])
-  .then(([initialCards]) => {
+const userID = '';
+
+Promise.all([api.getUserInfo(), api.getCards()])
+  .then(([userData, initialCards]) => {
+    userID = userData._id;
+    userInfo.setUserInfo(userData);
     cardList.renderCards(initialCards);
   })
   .catch((err) => {
@@ -105,7 +109,7 @@ function handleCardClick(name, link) {
 function addCard(data) {
   const card = new Card({
     data: data,
-    userId: userInfo.getUserId(),
+    userId: userID,
     handleCardClick,
     handleCardDelete: (cardID) => {
       deleteCardPopup.open();
@@ -126,7 +130,7 @@ function addCard(data) {
       handleCardLike: (cardID) => {
         api.addCardLike(cardID)
           .then((data) => {
-            card.showLikes(data.likes);
+            card.showLikes(data);
           })
           .catch((err) => {
             console.log(err);
@@ -135,7 +139,7 @@ function addCard(data) {
       handleCardLikeRemove: (cardID) => {
         api.removeCardLike(cardID)
           .then((data) => {
-            card.showLikes(data.likes);
+            card.showLikes(data);
           })
           .catch((err) => {
             console.log(err);
