@@ -113,6 +113,7 @@ function addCard(data) {
         deleteCardPopup.loading(true, 'Удаляем...');
         api.deleteCardApi(card.getId())
           .then(() => {
+            card.checkDeleteIcon(userId);
             card.deleteCard();
             deleteCardPopup.close();
           })

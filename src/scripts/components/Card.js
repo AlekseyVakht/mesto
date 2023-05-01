@@ -45,7 +45,7 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._element.querySelector('.element__heading').textContent = this._name;
-    this.addDeleteIcon();
+    this._checkDeleteIcon();
     this._setEventListeners();
     return this._element;
   }
@@ -72,8 +72,10 @@ export class Card {
     })
   }
 
-  addDeleteIcon() {
-    this._deleteIcon.classList.add('element__delete-icon_active');
+  checkDeleteIcon(userId) {
+    if (this._userId === userId) {
+      this._deleteIcon.classList.add('element__delete-icon_active');
+    }
   }
 
   _changeLikeState() {
