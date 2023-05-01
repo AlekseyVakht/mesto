@@ -72,6 +72,7 @@ const avatarPopup = new PopupWithForm({
     api.setAvatar(formData)
       .then((formData) => {
         userInfo.setUserAvatar(formData);
+        avatarPopup.close();
       })
       .catch(err => console.log(err))
       .finally(() => {
@@ -86,7 +87,8 @@ const placePopup = new PopupWithForm({
     placePopup.loading(true)
     api.postCard(formData)
       .then((formData) => {
-        addCard(formData);
+        cardList.addItem(addCard(formData));
+        placePopup.close();
       })
       .catch(err => console.log(err))
       .finally(() => {
@@ -98,12 +100,8 @@ const placePopup = new PopupWithForm({
 
 const imagePopup = new PopupWithImage('#popup-image-scaler');
 
-function handleCardClick(name, link) {
-  imagePopup.open({
-    image: link,
-    alt: name,
-    text: name
-    });
+function handleCardClick(alt ,src) {
+  imagePopup.open(alt, src);
 };
 
 function addCard(data) {
@@ -147,13 +145,13 @@ function addCard(data) {
           });
         }
     }, '#elements-template');
-  return cardList.addItem(card.generateCard());
+  return card.generateCard();
 }
 
 
 const cardList = new Section({
   renderer: (item) => {
-    addCard(item);
+    cardList.addItem(addCard(item));
     }
   },
   cardsGrid
