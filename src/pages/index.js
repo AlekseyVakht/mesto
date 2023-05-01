@@ -36,6 +36,7 @@ Promise.all([api.getUserInfoApi(), api.getCards()])
   .then(([userData, initialCards]) => {
     userId = userData._id;
     userInfo.setUserInfo(userData);
+    userInfo.setUserAvatar(userData.avatar);
     cardList.renderCards(initialCards);
   })
   .catch((err) => {

@@ -20,7 +20,7 @@ export class UserInfo {
   }
 
   setUserAvatar(data) {
-    this._userAvatar.src = `<%=require('${data.avatar}')%>`;
+    this._userAvatar.src = data.avatar;
   }
 
   getUserId() {
