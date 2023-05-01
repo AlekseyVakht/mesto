@@ -126,7 +126,7 @@ function addCard(data) {
       handleCardLike: (cardID) => {
         api.addCardLike(cardID)
           .then((data) => {
-            card.showLikes(data);
+            card.showLikes(data.likes);
           })
           .catch((err) => {
             console.log(err);
@@ -135,7 +135,7 @@ function addCard(data) {
       handleCardLikeRemove: (cardID) => {
         api.removeCardLike(cardID)
           .then((data) => {
-            card.showLikes(data);
+            card.showLikes(data.likes);
           })
           .catch((err) => {
             console.log(err);

@@ -9,7 +9,7 @@ export class Card {
     },
       templateSelector) {
 
-    this.data = data;
+    this.cardData = data;
     this._name = data.name;
     this._link = data.link;
 
@@ -47,10 +47,10 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._element.querySelector('.element__heading').textContent = this._name;
-    this.showLikes(this.data)
+    this.showLikes(this.cardData);
 
-    if (this._userIdCard === this._userId) {
-      this._deleteIcon.classList.add('element__delete-icon_active');
+    if (this._userIdCard !== this._userId) {
+      this._deleteIcon.classList.remove();
     }
     this._setEventListeners();
     return this._element;
@@ -69,8 +69,8 @@ export class Card {
     return this._likes.find((data) => data._id === this._userId)
   }
 
-  showLikes(card){
-    this._likes = card.likes
+  showLikes(data){
+    this._likes = data.likes
     if (this._likes.length === 0) {
       this._likeCounter.textContent = ''
     }
