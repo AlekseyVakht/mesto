@@ -5,7 +5,7 @@ export class PopupWithConfirm extends Popup {
     super(popupSelector);
     this._form = this._popup.querySelector('.popup__form');
     this._submitBtn = this._popup.querySelector('.popup__submit-btn');
-    this._submitBtnText = this._submitBtn.text;
+    this._submitBtnText = this._submitBtn.textContent;
   }
 
   setSubmit(submit) {
@@ -16,6 +16,7 @@ export class PopupWithConfirm extends Popup {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
+      this.loading(true, 'Удаляем...');
       this._handleSubmit();
       this.close();
     });

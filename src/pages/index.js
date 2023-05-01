@@ -30,7 +30,7 @@ const api = new Api({
   }
 });
 
-Promise.all([api.getUserInfoApi(), api.getCards()])
+Promise.all([api.getCards()])
   .then(([initialCards]) => {
     cardList.renderCards(initialCards);
   })
@@ -79,7 +79,6 @@ const avatarPopup = new PopupWithForm({
 
 const placePopup = new PopupWithForm({
   handleFormSubmit: (formData) => {
-    placePopup.loading(true, 'Сохранение...');
     api.postCard(formData)
       .then((formData) => {
         addCard(formData);
@@ -110,7 +109,6 @@ function addCard(data) {
     handleCardDelete: () => {
       deleteCardPopup.open();
       deleteCardPopup.setSubmit(() => {
-        deleteCardPopup.loading(true, 'Удаляем...');
         api.deleteCardApi(card.getId())
           .then(() => {
             card.deleteCard();
