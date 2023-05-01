@@ -57,6 +57,10 @@ export class Card {
     return this._element;
   }
 
+  getId() {
+    return this._id;
+  }
+
   deleteCard() {
     this._element.remove();
     this._element = null;

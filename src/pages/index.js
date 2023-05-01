@@ -111,12 +111,13 @@ function addCard(data) {
     data: data,
     userId,
     handleCardClick,
-    handleCardDelete: (cardID) => {
+    handleCardDelete: () => {
       deleteCardPopup.open();
       deleteCardPopup.setSubmit(() => {
         deleteCardPopup.loading(true);
-        api.deleteCardApi(cardID)
-          .then(() => {
+        api.deleteCardApi(card.getId())
+          .then((data) => {
+            card.deleteCard(data);
             deleteCardPopup.close();
           })
           .catch((err) => {
