@@ -85,8 +85,8 @@ export class Card {
     }
   }
 
-  _changeLikeState() {
-    if (this._likeIcon.classList.contains('element__like-icon_active')) {
+  clickLike() {
+    if (this.cardLike()) {
       this._handleCardLikeRemove(this._id);
     } else {
       this._handleCardLike(this._id);
@@ -99,7 +99,7 @@ export class Card {
     });
 
     this._likeIcon.addEventListener('click', () => {
-      this._changeLikeState();
+      this.clickLike();
     });
 
     this._cardImage.addEventListener('click', () => {

@@ -110,23 +110,23 @@ function addCard(data) {
     handleCardDelete: () => {
       deleteCardPopup.open();
       deleteCardPopup.setSubmit(() => {
+        deleteCardPopup.loading(true);
         api.deleteCardApi(card.getId())
           .then(() => {
-            card.deleteCard();
             deleteCardPopup.close();
           })
           .catch((err) => {
             console.log(err);
           })
           .finally(() => {
-            deleteCardPopup.loading(false, 'Да');
+            deleteCardPopup.loading(false);
           });
        });
       },
       handleCardLike: () => {
         api.addCardLike(card.getId())
           .then((data) => {
-            card.cardLiked(data);
+            card.showLikes(data);
           })
           .catch((err) => {
             console.log(err);
@@ -135,7 +135,7 @@ function addCard(data) {
       handleCardLikeRemove: () => {
         api.removeCardLike(card.getId())
           .then((data) => {
-            card.cardLiked(data);
+            card.showLikes(data);
           })
           .catch((err) => {
             console.log(err);
