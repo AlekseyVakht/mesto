@@ -57,10 +57,6 @@ export class Card {
     return this._element;
   }
 
-  getId() {
-    return this._id;
-  }
-
   deleteCard() {
     this._element.remove();
     this._element = null;
@@ -96,7 +92,7 @@ export class Card {
 
   _setEventListeners() {
     this._deleteIcon.addEventListener('click', () => {
-      this._handleCardDelete();
+      this._handleCardDelete(this.idCard);
     });
 
     this._likeIcon.addEventListener('click', () => {
