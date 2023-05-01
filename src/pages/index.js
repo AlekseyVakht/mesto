@@ -55,8 +55,10 @@ const userPopup = new PopupWithForm({
         userPopup.close();
       })
       .catch(err => console.log(err))
-      .finally(() => userPopup.loading(false, 'Сохранить'))
-  },
+      .finally(() => {
+        userPopup.loading(false, 'Сохранить')
+      });
+    },
   popupSelector: '#popup-edit'
 });
 
@@ -68,8 +70,10 @@ const avatarPopup = new PopupWithForm({
         userInfo.setUserAvatar(formData);
       })
       .catch(err => console.log(err))
-      .finally(() => avatarPopup.loading(false, 'Сохранить'))
-  },
+      .finally(() => {
+        avatarPopup.loading(false, 'Сохранить')
+      });
+    },
   popupSelector: '#popup-avatar-change'
 });
 
@@ -81,7 +85,9 @@ const placePopup = new PopupWithForm({
         addCard(formData);
       })
       .catch(err => console.log(err))
-      .finally(() => placePopup.loading(false, 'Сохранить'))
+      .finally(() => {
+        placePopup.loading(false, 'Сохранить')
+      });
     }, 
   popupSelector: '#popup-new-place'
 });
@@ -105,8 +111,8 @@ function addCard(data) {
       deleteCardPopup.open();
       deleteCardPopup.loading(true, 'Удаляем...');
         api.deleteCardApi(card.getId())
-          .then((data) => {
-            card.deleteCard(data);
+          .then(() => {
+            card.deleteCard();
             deleteCardPopup.close();
           })
           .catch((err) => {

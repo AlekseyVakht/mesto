@@ -1,6 +1,6 @@
 .element__delete-icon {
   position: absolute;
-  display: block;
+  display: hidden;
   z-index: 1;
   padding: 0;
   background-image: url('../../../images/delete-icon.svg');

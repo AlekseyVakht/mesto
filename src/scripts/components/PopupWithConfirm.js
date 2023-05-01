@@ -20,10 +20,8 @@ export class PopupWithConfirm extends Popup {
   loading(isLoading, text) {
     if (isLoading) {
       this._submitBtnText = text;
-      this._submitBtn.disabled = true;
     } else {
       this._submitBtnText = text;
-      this._submitBtn.disabled = false;
     }
   }
 }

@@ -61,8 +61,8 @@ export class Api {
     .then(res => this._isResOk(res))
   };
 
-  likeCard(data, isLiked) {
-    return fetch(`${this._baseUrl}cards/${data.id}/likes`, {
+  likeCard(_id, isLiked) {
+    return fetch(`${this._baseUrl}cards/${_id}/likes`, {
       method: isLiked ? 'DELETE' : 'PUT',
       headers: this._headers
     })

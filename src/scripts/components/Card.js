@@ -77,10 +77,8 @@ export class Card {
   }
 
   _checkUserDeleteState() {
-    if (this._userId !== this._owner) {
-      this._deleteIcon.remove();
-    } else {
-      this._deleteIcon.prepend(this._element);
+    if (this._userId === this._owner) {
+      this._deleteIcon.classList.add('element__delete-icon_active');
     }
   }
 
@@ -94,7 +92,7 @@ export class Card {
 
   _setEventListeners() {
     this._deleteIcon.addEventListener('click', () => {
-      this._handleCardDelete()
+      this.deleteCard();
     });
 
     this._likeIcon.addEventListener('click', () => {
