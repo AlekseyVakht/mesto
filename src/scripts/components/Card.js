@@ -50,15 +50,11 @@ export class Card {
     this.showLikes(this.cardData);
 
     if (this._userIdCard !== this._userId) {
-      this._deleteIcon.classList.remove();
-    }
-    
+      this._deleteIcon.remove();
+    };
+
     this._setEventListeners();
     return this._element;
-  }
-
-  getId() {
-    return this._id;
   }
 
   deleteCard() {

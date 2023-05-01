@@ -30,11 +30,11 @@ const api = new Api({
   }
 });
 
-const userID = '';
+let userId;
 
 Promise.all([api.getUserInfoApi(), api.getCards()])
   .then(([userData, initialCards]) => {
-    userID = userData._id;
+    userId = userData._id;
     userInfo.setUserInfo(userData);
     cardList.renderCards(initialCards);
   })
@@ -109,7 +109,7 @@ function handleCardClick(name, link) {
 function addCard(data) {
   const card = new Card({
     data: data,
-    userId: userID,
+    userId,
     handleCardClick,
     handleCardDelete: (cardID) => {
       deleteCardPopup.open();
