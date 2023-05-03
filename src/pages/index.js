@@ -88,7 +88,7 @@ const placePopup = new PopupWithForm({
     placePopup.loading(true)
     api.postCard(formData)
       .then((formData) => {
-        cardList.addInitCard(addCard(formData));
+        cardList.addNewCard(addCard(formData));
         placePopup.close();
       })
       .catch(err => console.log(err))
@@ -152,7 +152,7 @@ function addCard(data) {
 
 const cardList = new Section({
   renderer: (item) => {
-    cardList.addNewCard(addCard(item));
+    cardList.addInitCard(addCard(item));
     }
   },
   cardsGrid
