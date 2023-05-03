@@ -5,11 +5,11 @@ export class Section {
   }
 
   addInitCard(elem) {
-    this._container.prepend(elem);
+    this._container.append(elem);
   }
 
   addNewCard(elem) {
-    this._container.append(elem);
+    this._container.prepend(elem);
   }
 
   renderCards(items) {
